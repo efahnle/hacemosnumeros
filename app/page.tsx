@@ -1,5 +1,5 @@
 import { archivo } from '@/app/ui/fonts';
-import { FormPage } from './ui/TagsFormPage';
+import { FormPage } from './components/TagsFormPage';
 //import Image from "next/image";
 export default function Home() {
   return (

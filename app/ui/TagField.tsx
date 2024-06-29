@@ -17,7 +17,7 @@ export const TagField = ({ tags, addTag, removeTag, maxTags }: iTag) => {
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      if (userInput.trim() !== "" && userInput.length <= 30 && tags.length < maxTags) {
+      if (userInput.trim() !== "" && userInput.length <= 100 && tags.length < maxTags) {
         addTag(userInput);
         setUserInput("");
       }
