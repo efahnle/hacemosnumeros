@@ -18,15 +18,15 @@ interface ExpensesTableProps {
 
 const ExpensesTable: React.FC<ExpensesTableProps> = ({ expenses, onDelete, onModify }) => {
   return (
-    <div className="overflow-x-auto text-center object-top lg:text-2xl md:text-1xl items-center p-12">
+    <div className="overflow-x-auto text-center object-top  text-xs sm:text-l md:text-2xl  items-center p-2 mt-8">
       <table className="min-w-full bg-white border border-gray-200">
         <thead>
           <tr>
-            <th className="px-4 py-2 border-b">Persona</th>
-            <th className="px-4 py-2 border-b">Descripción</th>
-            <th className="px-4 py-2 border-b">Involucrados</th>
-            <th className="px-4 py-2 border-b">Gasto</th>
-            <th className="px-4 py-2 border-b">Acciones</th>
+            <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Persona</th>
+            <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Descripción</th>
+            <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Involucrados</th>
+            <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Gasto</th>
+            <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Acciones</th>
           </tr>
         </thead>
         <tbody>

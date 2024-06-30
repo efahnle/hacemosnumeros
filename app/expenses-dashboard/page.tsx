@@ -31,7 +31,7 @@ const ExpensesDashboardPage = () => {
 
   return (
     <main className="flex flex-col items-center p-20 min-w-32">
-      <h1 className="flex text-center break-normal items-center lg:text-5xl text-2xl md:text-3xl">Cargá los gastos</h1>
+      <h1 className="flex text-center break-normal items-center text-2xl md:text-3xl lg:text-5xl ">Cargá los gastos</h1>
       <ExpensesTable expenses={expenses} onDelete={handleDelete} onModify={handleModify} />
       <ButtonBar onButtonClick={handleButtonClick} />
     </main>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
+import { AiOutlinePlus, AiOutlineCheck } from 'react-icons/ai'; // Import an icon from react-icons
 
 interface ButtonBarProps {
   onButtonClick: (buttonIndex: number) => void;
@@ -19,7 +20,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ onButtonClick }) => {
         onClick={() => onButtonClick(1)}
         className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700"
       >
-        + Agregar gasto
+        <AiOutlinePlus/>
       </button>
       <div className="flex items-center space-x-2">
         <input
@@ -38,7 +39,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ onButtonClick }) => {
         onClick={() => onButtonClick(3)}
         className="bg-green-500 px-4 py-2 rounded hover:bg-green-700"
       >
-        Finalizar
+        <AiOutlineCheck />
       </button>
     </div>
   );
