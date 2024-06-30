@@ -10,47 +10,10 @@ interface ExpenseCrudProps {
 }
 
 export const ExpenseCrud: React.FC<ExpenseCrudProps> = ({ onInputChange, prePayer, preAmount, preParticipants, preDescription }) => {
-  let [payer, setPayer] = useState(prePayer);
-  let [amount, setAmount] = useState(preAmount);
-  let [participants, setParticipants] = useState(preParticipants);
-  let [description, setDescription] = useState(preDescription);
-  /*
-  if (prePayer){
-    payer = prePayer;
-  }
-  if (preAmount){
-    amount = preAmount;
-  }
-  if (preParticipants){
-    participants = preParticipants;
-  }
-  if (preDescription){
-    description = preDescription;
-  }
-  
-  let [payer, setPayer] = useState<string>(prePayer);
-  let [amount, setAmount] = useState<number | ''>('');
-  let [participants, setParticipants] = useState<string[]>([]);
-  let [description, setDescription] = useState<string>('');
-
-  if (prePayer){
-    payer = prePayer;
-  }
-  if (preAmount){
-    amount = preAmount;
-  }
-  if (preParticipants){
-    participants = preParticipants;
-  }
-  if (preDescription){
-    description = preDescription;
-  }*/
-  
-  //console.log(payer);
-  //console.log(amount);
-  //console.log(participants);
-  //console.log(description);
-  //
+  const [payer, setPayer] = useState(prePayer);
+  const [amount, setAmount] = useState(preAmount || '');
+  const [participants, setParticipants] = useState(preParticipants);
+  const [description, setDescription] = useState(preDescription || '' );
 
   const handlePayerChange = (value: string) => {
     setPayer(value);
@@ -59,7 +22,7 @@ export const ExpenseCrud: React.FC<ExpenseCrudProps> = ({ onInputChange, prePaye
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-    setAmount(value);
+    setAmount(isNaN(value) ? 0 : value); // Ensure amount is a valid number or fallback to 0
     onInputChange('amount', value);
   };
 

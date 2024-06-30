@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+
+import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
 import { AiOutlinePlus, AiOutlineCheck } from 'react-icons/ai'; // Import an icon from react-icons
 
@@ -7,11 +8,20 @@ interface ButtonBarProps {
 }
 
 const ButtonBar: React.FC<ButtonBarProps> = ({ onButtonClick }) => {
-  const [isRadioOn, setIsRadioOn] = useState(false)
+  const [isRadioOn, setIsRadioOn] = useState<boolean>(false);
+
+  useEffect(() => {
+    const simplifySetting = localStorage.getItem('simplify');
+    if (simplifySetting) {
+      setIsRadioOn(simplifySetting === 'true');
+    }
+  }, []);
 
   const handleRadioChange = () => {
-    setIsRadioOn(!isRadioOn);
-    onButtonClick(2);
+    const newSimplifySetting = !isRadioOn;
+    setIsRadioOn(newSimplifySetting);
+    localStorage.setItem('simplify', String(newSimplifySetting));
+    onButtonClick(2); // Optionally trigger action on button click
   };
 
   return (
@@ -30,9 +40,8 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ onButtonClick }) => {
           onChange={handleRadioChange}
           className="form-checkbox h-5 w-5 text-green-500"
         />
-        <label htmlFor="radioButton" className="mr-2">Simplificar</label>
         <Link href="/simplificar" className="text-blue-300 underline">
-          ¿Qué es esto?
+          Simplificar (?)
         </Link>
       </div>
       <button

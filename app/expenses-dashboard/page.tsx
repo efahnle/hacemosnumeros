@@ -5,14 +5,6 @@ import ExpensesTable from '@/app/components/ExpensesTable';
 import ButtonBar from '@/app/components/ButtonBar'
 import LocalStorageClear from '@/app/components/LocalStorage'
 
-// Define a type for the expense items
-interface ExpenseItem {
-  id: number;
-  persona: string;
-  descripcion: string;
-  involucrados: string;
-  gasto: number;
-}
 
 const ExpensesDashboardPage = () => {
   const router = useRouter();
@@ -55,7 +47,13 @@ const ExpensesDashboardPage = () => {
     console.log(`Button ${buttonIndex} clicked`);
     if (buttonIndex == 1) {
       router.push('/add-expense');
-    }
+    } 
+    //if (buttonIndex == 2) {
+    //  const simplifySetting = localStorage.getItem('simplify');
+    //  const simplifySettingBool = Boolean(simplifySetting);
+    //  const newSimplifySetting = !simplifySettingBool;
+    //  localStorage.setItem('simplify', String(newSimplifySetting));
+    //}
     
   };
 

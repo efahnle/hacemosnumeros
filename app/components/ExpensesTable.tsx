@@ -22,7 +22,7 @@ interface ExpensesTableProps {
 
 const ExpensesTable: React.FC<ExpensesTableProps> = ({ expenses, onDelete, onModify }) => {
   return (
-    <div className="overflow-x-auto text-center object-top  text-xs sm:text-l md:text-2xl  items-center p-2 mt-8">
+    <div className="overflow-x-auto text-center object-top  text-xs sm:text-l md:text-2xl  items-center p-2 mt-12">
       <table className="min-w-full bg-white border border-gray-200">
         <thead>
           <tr>
@@ -36,11 +36,11 @@ const ExpensesTable: React.FC<ExpensesTableProps> = ({ expenses, onDelete, onMod
         <tbody>
           {expenses && expenses.map((expense, index) => (
             <tr key={index}>
-              <td className="px-4 py-2 border-b">{expense.payer}</td>
-              <td className="px-4 py-2 border-b">{expense.description}</td>
-              <td className="px-4 py-2 border-b">{expense.participants.join(', ')}</td>
-              <td className="px-4 py-2 border-b">${expense.amount.toFixed(2)}</td>
-              <td className="px-4 py-2 border-b items-center ">
+              <td className="px-1 py-0.5 border-b">{expense.payer}</td>
+              <td className="px-1 py-0.5 border-b">{expense.description}</td>
+              <td className="px-1 py-0.5 border-b">{expense.participants.join(', ')}</td>
+              <td className="px-1 py-0.5 border-b">${expense.amount.toFixed(2)}</td>
+              <td className="px-1 py-0.5 border-b items-center ">
                 <button
                   onClick={() => onModify(index)}
                   className="text-blue-500 hover:text-blue-700 px-3"
