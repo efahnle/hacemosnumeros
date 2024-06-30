@@ -15,7 +15,7 @@ export const FormPage = () => {
   const handleSubmit = (event : FormEvent) => {
     event.preventDefault();
     console.log(tags);
-    localStorage.setItem('tags', JSON.stringify(tags));
+    localStorage.setItem('names', JSON.stringify(tags));
     
     router.push('/expenses-dashboard');
   };

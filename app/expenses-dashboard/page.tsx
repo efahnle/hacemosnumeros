@@ -18,10 +18,15 @@ const ExpensesDashboardPage = () => {
   const router = useRouter();
 
   //const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
-  const tmp_expenses = localStorage.getItem('expenses')
-  const expenses = JSON.parse(tmp_expenses)
-  console.log(expenses)
-
+  const tmp_expenses = localStorage.getItem('expenses');
+  let expenses;
+  if (tmp_expenses){
+    expenses = JSON.parse(tmp_expenses);
+  } else {
+    expenses = [];
+  }
+  
+  
 
   const handleDelete = (id: number) => {
     //setExpenses(prevExpenses => prevExpenses.filter(expense => expense.id !== id));
@@ -31,12 +36,14 @@ const ExpensesDashboardPage = () => {
   const handleModify = (id: number) => {
     // Placeholder for modifying an expense item
     console.log(`Modify expense with id: ${id}`);
+    const url = '/edit-expense/' + id.toString()
+    router.push(url);
   };
 
   const handleButtonClick = (buttonIndex: number) => {
     console.log(`Button ${buttonIndex} clicked`);
     if (buttonIndex == 1) {
-      router.push('/add-expense');
+      router.push('/add-expense',);
     }
     
   };

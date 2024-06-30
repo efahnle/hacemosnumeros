@@ -3,20 +3,34 @@ import { useState, useEffect, useRef } from 'react';
 interface DropdownComponentProps {
   multiSelect?: boolean;
   onSelect: (value: any) => void;
+  prePayer?: string
+  preParticipants?: string[]
 }
 
-const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = false, onSelect }) => {
+const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = false, onSelect, prePayer, preParticipants }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [options, setOptions] = useState<string[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const storedOptions = localStorage.getItem('tags');
+    const storedOptions = localStorage.getItem('names');
+
+    
+
     if (storedOptions) {
       setOptions(JSON.parse(storedOptions));
     }
+
+    if (prePayer) {
+        setSelectedOptions([prePayer]);
+    } 
+    if (preParticipants && preParticipants.length > 0) {
+        setSelectedOptions(preParticipants);
+    }
+
   }, []);
+
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);

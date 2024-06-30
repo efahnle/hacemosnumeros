@@ -3,13 +3,54 @@ import { useState } from 'react';
 
 interface ExpenseCrudProps {
   onInputChange: (name: string, value: any) => void;
+  prePayer?: string
+  preAmount?: number
+  preParticipants?: string[]
+  preDescription?: string
 }
 
-export const ExpenseCrud: React.FC<ExpenseCrudProps> = ({ onInputChange }) => {
-  const [payer, setPayer] = useState<string>('');
-  const [amount, setAmount] = useState<number | ''>('');
-  const [participants, setParticipants] = useState<string[]>([]);
-  const [description, setDescription] = useState<string>('');
+export const ExpenseCrud: React.FC<ExpenseCrudProps> = ({ onInputChange, prePayer, preAmount, preParticipants, preDescription }) => {
+  let [payer, setPayer] = useState(prePayer);
+  let [amount, setAmount] = useState(preAmount);
+  let [participants, setParticipants] = useState(preParticipants);
+  let [description, setDescription] = useState(preDescription);
+  /*
+  if (prePayer){
+    payer = prePayer;
+  }
+  if (preAmount){
+    amount = preAmount;
+  }
+  if (preParticipants){
+    participants = preParticipants;
+  }
+  if (preDescription){
+    description = preDescription;
+  }
+  
+  let [payer, setPayer] = useState<string>(prePayer);
+  let [amount, setAmount] = useState<number | ''>('');
+  let [participants, setParticipants] = useState<string[]>([]);
+  let [description, setDescription] = useState<string>('');
+
+  if (prePayer){
+    payer = prePayer;
+  }
+  if (preAmount){
+    amount = preAmount;
+  }
+  if (preParticipants){
+    participants = preParticipants;
+  }
+  if (preDescription){
+    description = preDescription;
+  }*/
+  
+  //console.log(payer);
+  //console.log(amount);
+  //console.log(participants);
+  //console.log(description);
+  //
 
   const handlePayerChange = (value: string) => {
     setPayer(value);
@@ -36,7 +77,7 @@ export const ExpenseCrud: React.FC<ExpenseCrudProps> = ({ onInputChange }) => {
   return (
     <div className="grid grid-cols-2 gap-x-6 gap-y-16 align-middle h-16">
       <div className="text-left text-slate-500">¿Quién hizo el gasto?</div>
-      <DropdownComponent onSelect={handlePayerChange} />
+      <DropdownComponent onSelect={handlePayerChange} prePayer={prePayer} />
 
       <div className="text-left text-slate-500">¿Cuánto gastó?</div>
       <div>
@@ -52,7 +93,7 @@ export const ExpenseCrud: React.FC<ExpenseCrudProps> = ({ onInputChange }) => {
       </div>
 
       <div className="text-left text-slate-500">¿Entre quienes?</div>
-      <DropdownComponent multiSelect={true} onSelect={handleParticipantsChange} />
+      <DropdownComponent multiSelect={true} onSelect={handleParticipantsChange} preParticipants={preParticipants} />
 
       <div className="text-left text-slate-500">¿En qué?</div>
       <div>

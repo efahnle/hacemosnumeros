@@ -32,7 +32,7 @@ const ExpensesTable: React.FC<ExpensesTableProps> = ({ expenses, onDelete, onMod
           </tr>
         </thead>
         <tbody>
-          {expenses.map((expense, index) => (
+          {expenses && expenses.map((expense, index) => (
             <tr key={index}>
               <td className="px-4 py-2 border-b">{expense.payer}</td>
               <td className="px-4 py-2 border-b">{expense.description}</td>
