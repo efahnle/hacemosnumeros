@@ -1,18 +1,16 @@
-'use client'
-
 import { useState, useEffect, useRef } from 'react';
 
 interface DropdownComponentProps {
-  multiSelect?: boolean; // Optional prop to enable multi-select
+  multiSelect?: boolean;
+  onSelect: (value: any) => void;
 }
 
-const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = false }) => {
+const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = false, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [options, setOptions] = useState<string[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Retrieve options from local storage
   useEffect(() => {
     const storedOptions = localStorage.getItem('tags');
     if (storedOptions) {
@@ -25,16 +23,17 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = fal
   };
 
   const handleSelectOption = (option: string) => {
+    let updatedOptions;
     if (multiSelect) {
-      setSelectedOptions(prevOptions =>
-        prevOptions.includes(option)
-          ? prevOptions.filter(opt => opt !== option)
-          : [...prevOptions, option]
-      );
+      updatedOptions = selectedOptions.includes(option)
+        ? selectedOptions.filter(opt => opt !== option)
+        : [...selectedOptions, option];
     } else {
-      setSelectedOptions([option]);
+      updatedOptions = [option];
       setIsOpen(false);
     }
+    setSelectedOptions(updatedOptions);
+    onSelect(multiSelect ? updatedOptions : option);
   };
 
   const renderSelectedOptions = () => {

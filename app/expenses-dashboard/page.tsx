@@ -1,4 +1,6 @@
 'use client'
+
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import ExpensesTable from '@/app/components/ExpensesTable';
 import ButtonBar from '@/app/components/ButtonBar'
@@ -13,6 +15,8 @@ interface ExpenseItem {
 }
 
 const ExpensesDashboardPage = () => {
+  const router = useRouter();
+
   const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
 
   const handleDelete = (id: number) => {
@@ -26,7 +30,10 @@ const ExpensesDashboardPage = () => {
 
   const handleButtonClick = (buttonIndex: number) => {
     console.log(`Button ${buttonIndex} clicked`);
-    // Add your logic here for each button click
+    if (buttonIndex == 1) {
+      router.push('/add-expense');
+    }
+    
   };
 
   return (

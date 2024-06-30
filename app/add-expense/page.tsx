@@ -1,16 +1,64 @@
-'use client'
+'use client';
 
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { archivo } from '@/app/ui/fonts';
-import { ExpenseCrud } from '@/app/components/ExpenseCRUD';
+import { ExpenseCrud } from '../components/ExpenseCRUD';
 import ConfirmCancelBar from '../components/ConfirmCancelBar';
 
 export default function Home() {
+  const router = useRouter();
+  const [expenseData, setExpenseData] = useState({
+    payer: '',
+    amount: 0,
+    participants: [],
+    description: ''
+  });
 
-const handleButtonClick = (buttonIndex: number) => {
+  const handleInputChange = (name: string, value: any) => {
+    setExpenseData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleButtonClick = (buttonIndex: number) => {
     console.log(`Button ${buttonIndex} clicked`);
-    // Add your logic here for each button click
-    };
-    
+    if (buttonIndex === 1) {
+      // User confirmed, validate input and save in localStorage
+      if (validateExpenseData(expenseData)) {
+        appendExpenseToLocalStorage(expenseData);
+        router.push('/expenses-dashboard');
+      } else {
+        alert('Please fill out all fields correctly.');
+      }
+    }
+
+    if (buttonIndex === 2) {
+      // User cancelled, go back
+      router.push('/expenses-dashboard');
+    }
+  };
+
+  const validateExpenseData = (data: typeof expenseData) => {
+    return (
+      data.payer &&
+      data.amount > 0 &&
+      data.participants.length > 0 &&
+      data.description
+    );
+  };
+
+
+  const appendExpenseToLocalStorage = (newExpense: typeof expenseData) => {
+    const existingExpenses = localStorage.getItem('expenses');
+    let expenses = existingExpenses ? JSON.parse(existingExpenses) : [];
+
+    expenses.push(newExpense);
+
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+  };
+
   return (
     <main className="flex flex-col items-center p-20 min-w-32">
       <div>
@@ -20,8 +68,8 @@ const handleButtonClick = (buttonIndex: number) => {
       </div>
       <div>
         <div className='text-center object-top w-screen lg:text-2xl md:text-1xl items-center p-12'>
-          <ExpenseCrud/>
-          <ConfirmCancelBar onButtonClick={handleButtonClick}/>
+          <ExpenseCrud onInputChange={handleInputChange} />
+          <ConfirmCancelBar onButtonClick={handleButtonClick} />
         </div>
       </div>
     </main>
