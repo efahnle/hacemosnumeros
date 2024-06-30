@@ -25,18 +25,19 @@ export default function Home() {
   const handleButtonClick = (buttonIndex: number) => {
     console.log(`Button ${buttonIndex} clicked`);
     if (buttonIndex === 1) {
+      // User cancelled, go back
+      router.push('/expenses-dashboard');
+    }
+
+    if (buttonIndex === 2) {
       // User confirmed, validate input and save in localStorage
       if (validateExpenseData(expenseData)) {
         appendExpenseToLocalStorage(expenseData);
         router.push('/expenses-dashboard');
       } else {
-        alert('Please fill out all fields correctly.');
+        alert('Por favor, completá todos los campos');
       }
-    }
 
-    if (buttonIndex === 2) {
-      // User cancelled, go back
-      router.push('/expenses-dashboard');
     }
   };
 

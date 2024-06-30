@@ -11,18 +11,19 @@ const ConfirmCancelBar: React.FC<ConfirmCancelBarProps> = ({ onButtonClick }) =>
   
   return (
     <div className="fixed bottom-0 left-0 w-full bg-gray-800 text-white py-4 flex justify-evenly">
-      <button
+    <button
         onClick={() => onButtonClick(1)}
-        className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700"
+        className="bg-red-500 px-4 py-2 rounded hover:bg-red-700"
       >
-        <AiOutlineCheck/>
+        <AiOutlineClose />
       </button>
       <button
         onClick={() => onButtonClick(2)}
         className="bg-green-500 px-4 py-2 rounded hover:bg-green-700"
       >
-        <AiOutlineClose />
+        <AiOutlineCheck/>
       </button>
+
     </div>
   );
 };
