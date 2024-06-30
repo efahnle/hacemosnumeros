@@ -1,9 +1,9 @@
 'use client'
 
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
 import ExpensesTable from '@/app/components/ExpensesTable';
 import ButtonBar from '@/app/components/ButtonBar'
+import LocalStorageClear from '@/app/components/LocalStorage'
 
 // Define a type for the expense items
 interface ExpenseItem {
@@ -18,19 +18,30 @@ const ExpensesDashboardPage = () => {
   const router = useRouter();
 
   //const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
-  const tmp_expenses = localStorage.getItem('expenses');
-  let expenses;
-  if (tmp_expenses){
-    expenses = JSON.parse(tmp_expenses);
-  } else {
-    expenses = [];
+  const loadExpenses = () => {
+    const tmp_expenses = localStorage.getItem('expenses');
+    if (tmp_expenses){
+      return JSON.parse(tmp_expenses);
+    } else {
+      return [];
+    } 
   }
-  
+
+  const expenses = loadExpenses();
+
   
 
-  const handleDelete = (id: number) => {
-    //setExpenses(prevExpenses => prevExpenses.filter(expense => expense.id !== id));
-    console.log(`should delete expense with id: ${id}`);
+  const handleDelete = (index: number) => {
+    console.log(`should delete expense at index: ${index}`);
+
+    const existingExpenses = localStorage.getItem('expenses');
+    let expenses = existingExpenses ? JSON.parse(existingExpenses) : [];
+  
+    expenses.splice(index, 1);
+  
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+  
+    location.reload();
   };
 
   const handleModify = (id: number) => {
@@ -43,7 +54,7 @@ const ExpensesDashboardPage = () => {
   const handleButtonClick = (buttonIndex: number) => {
     console.log(`Button ${buttonIndex} clicked`);
     if (buttonIndex == 1) {
-      router.push('/add-expense',);
+      router.push('/add-expense');
     }
     
   };

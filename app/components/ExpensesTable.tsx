@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'; // Import an icon from react-icons

@@ -59,9 +59,6 @@ export default function Home() {
     console.log(data.participants)
     console.log(data.description)
     
-    
-    
-    
     return (
       data.payer &&
       data.amount > 0 &&
