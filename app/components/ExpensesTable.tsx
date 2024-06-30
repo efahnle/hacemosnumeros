@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'; // Import an icon from react-icons
+
+
 // Define a type for the expense items
 interface ExpenseItem {
-  id: number;
-  persona: string;
-  descripcion: string;
-  involucrados: string;
-  gasto: number;
+  payer: string;
+  description: string;
+  participants: [string];
+  amount: number;
 }
 
 // Define the props for the ExpensesTable component
@@ -30,24 +32,24 @@ const ExpensesTable: React.FC<ExpensesTableProps> = ({ expenses, onDelete, onMod
           </tr>
         </thead>
         <tbody>
-          {expenses.map((expense) => (
-            <tr key={expense.id}>
-              <td className="px-4 py-2 border-b">{expense.persona}</td>
-              <td className="px-4 py-2 border-b">{expense.descripcion}</td>
-              <td className="px-4 py-2 border-b">{expense.involucrados}</td>
-              <td className="px-4 py-2 border-b">{expense.gasto.toFixed(2)}</td>
-              <td className="px-4 py-2 border-b flex space-x-2">
+          {expenses.map((expense, index) => (
+            <tr key={index}>
+              <td className="px-4 py-2 border-b">{expense.payer}</td>
+              <td className="px-4 py-2 border-b">{expense.description}</td>
+              <td className="px-4 py-2 border-b">{expense.participants.join(', ')}</td>
+              <td className="px-4 py-2 border-b">${expense.amount.toFixed(2)}</td>
+              <td className="px-4 py-2 border-b items-center ">
                 <button
-                  onClick={() => onModify(expense.id)}
-                  className="text-blue-500 hover:text-blue-700"
+                  onClick={() => onModify(index)}
+                  className="text-blue-500 hover:text-blue-700 px-3"
                 >
-                  Modificar
+                  <AiOutlineEdit/>
                 </button>
                 <button
-                  onClick={() => onDelete(expense.id)}
-                  className="text-red-500 hover:text-red-700"
+                  onClick={() => onDelete(index)}
+                  className="text-red-500 hover:text-red-700 px-"
                 >
-                  Eliminar
+                  <AiOutlineDelete/>
                 </button>
               </td>
             </tr>

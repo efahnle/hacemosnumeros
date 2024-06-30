@@ -17,10 +17,15 @@ interface ExpenseItem {
 const ExpensesDashboardPage = () => {
   const router = useRouter();
 
-  const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
+  //const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
+  const tmp_expenses = localStorage.getItem('expenses')
+  const expenses = JSON.parse(tmp_expenses)
+  console.log(expenses)
+
 
   const handleDelete = (id: number) => {
-    setExpenses(prevExpenses => prevExpenses.filter(expense => expense.id !== id));
+    //setExpenses(prevExpenses => prevExpenses.filter(expense => expense.id !== id));
+    console.log(`should delete expense with id: ${id}`);
   };
 
   const handleModify = (id: number) => {
