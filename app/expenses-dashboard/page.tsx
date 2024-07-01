@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ExpensesTable from '@/app/components/ExpensesTable';
 import ButtonBar from '@/app/components/ButtonBar'
 import Modal from '../components/Modal';
@@ -11,7 +11,13 @@ const ExpensesDashboardPage = () => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState<() => void>(() => { });
+  const [simplifyStatus, setSimplifyStatus] = useState(false);
 
+
+  useEffect(() => {
+    const simplifySetting = localStorage.getItem('simplify');
+    setSimplifyStatus(!Boolean(simplifySetting));
+  }, []);
 
   //const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
   const loadExpenses = () => {
@@ -48,10 +54,14 @@ const ExpensesDashboardPage = () => {
   };
 
   const handleButtonClick = (buttonIndex: number) => {
-    console.log(`Button ${buttonIndex} clicked`);
-    if (buttonIndex == 1) {
+    if (buttonIndex === 1) {
       router.push('/add-expense');
     } else if (buttonIndex === 3) {
+      // Check the current simplify status before showing the modal
+      const simplifySetting = localStorage.getItem('simplify');
+      const isSimplifyActive = simplifySetting === "true";
+      setSimplifyStatus(isSimplifyActive);
+
       // Show modal to confirm action
       setModalAction(() => () => {
         console.log('Confirmed action for button 3');
@@ -60,8 +70,8 @@ const ExpensesDashboardPage = () => {
       });
       setIsModalOpen(true);
     }
-
   };
+
 
   return (
     <main className="flex flex-col items-center p-20 min-w-32">
@@ -73,7 +83,8 @@ const ExpensesDashboardPage = () => {
         onClose={() => setIsModalOpen(false)}
         onConfirm={modalAction}
         title="¿Hacemos números entonces?"
-        message="Si ya cargaste todos los datos, podés confirmar. (Se recomienda tener la función de Simplificar activada)"
+        message="Si ya cargaste todos los datos, podés confirmar."
+        simplifyStatus={simplifyStatus}
       />
     </main>
   );
