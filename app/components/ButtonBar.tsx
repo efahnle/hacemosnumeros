@@ -40,7 +40,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ onButtonClick }) => {
           onChange={handleRadioChange}
           className="form-checkbox h-5 w-5 text-green-500"
         />
-        <Link href="/simplificar" className="text-blue-300 underline">
+        <Link href="/simplify" className="text-blue-300 underline">
           Simplificar (?)
         </Link>
       </div>

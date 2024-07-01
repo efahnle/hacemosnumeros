@@ -35,14 +35,10 @@ const ExpensesDashboardPage = () => {
 
   const handleDelete = (index: number) => {
     console.log(`should delete expense at index: ${index}`);
-
     const existingExpenses = localStorage.getItem('expenses');
     let expenses = existingExpenses ? JSON.parse(existingExpenses) : [];
-
     expenses.splice(index, 1);
-
     localStorage.setItem('expenses', JSON.stringify(expenses));
-
     location.reload();
   };
 
