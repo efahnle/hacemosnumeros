@@ -58,11 +58,10 @@ const ExpensesDashboardPage = () => {
       const isSimplifyActive = simplifySetting === "true";
       setSimplifyStatus(isSimplifyActive);
 
-      // Show modal to confirm action
       setModalAction(() => () => {
         console.log('Confirmed action for button 3');
-        router.push('/some-other-page'); // Replace with the desired path
-        setIsModalOpen(false); // Close modal after action
+        router.push('/results-dashboard'); 
+        setIsModalOpen(false);
       });
       setIsModalOpen(true);
     }
