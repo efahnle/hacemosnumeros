@@ -53,7 +53,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = fal
   const renderSelectedOptions = () => {
     return selectedOptions.length > 0
       ? selectedOptions.join(', ')
-      : multiSelect ? 'Elegí dos o más personas' : 'Elegí una persona';
+      : multiSelect ? 'Elegí' : 'Elegí una persona';
   };
 
   const handleClickOutside = (event: MouseEvent) => {
