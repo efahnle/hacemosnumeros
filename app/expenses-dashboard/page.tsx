@@ -53,17 +53,25 @@ const ExpensesDashboardPage = () => {
     if (buttonIndex === 1) {
       router.push('/add-expense');
     } else if (buttonIndex === 3) {
+
       // Check the current simplify status before showing the modal
       const simplifySetting = localStorage.getItem('simplify');
       const isSimplifyActive = simplifySetting === "true";
       setSimplifyStatus(isSimplifyActive);
 
-      setModalAction(() => () => {
-        console.log('Confirmed action for button 3');
-        router.push('/results-dashboard'); 
-        setIsModalOpen(false);
-      });
-      setIsModalOpen(true);
+      if (!isSimplifyActive) {
+        setModalAction(() => () => {
+          console.log('Confirmed action for button 3');
+          router.push('/results-dashboard'); 
+          setIsModalOpen(false);
+        });
+        setIsModalOpen(true);
+      } else {
+        // Perform the action directly if simplifyStatus is true
+        router.push('/results-dashboard');
+      }
+      
+      
     }
   };
 
@@ -73,14 +81,16 @@ const ExpensesDashboardPage = () => {
       <h1 className="flex text-center break-normal items-center text-2xl md:text-3xl lg:text-5xl ">Cargá los gastos</h1>
       <ExpensesTable expenses={expenses} onDelete={handleDelete} onModify={handleModify} />
       <ButtonBar onButtonClick={handleButtonClick} />
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onConfirm={modalAction}
-        title="¿Hacemos números entonces?"
-        message="Si ya cargaste todos los datos, podés confirmar."
-        simplifyStatus={simplifyStatus}
-      />
+      <div>
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onConfirm={modalAction}
+          title="Recomendación"
+          message="¿Querés seguir igual?"
+          simplifyStatus={simplifyStatus}
+        />
+      </div>
     </main>
   );
 };
