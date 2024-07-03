@@ -21,7 +21,7 @@ export const FormPage = () => {
   };
 
   return (
-    <section className="flex justify-center gap-y-4">
+    <section className="items-center justify-center gap-y-4 ">
       <form onSubmit={handleSubmit}>
         <TagField
           tags={tags}
@@ -35,7 +35,7 @@ export const FormPage = () => {
           className={`pd-4 h-10 items-center justify-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 ${tags.length < MIN_TAGS ? "opacity-50 cursor-not-allowed" : ""}`}
           disabled={tags.length < MIN_TAGS}
         >
-          Continuar
+          Comenzar
         </button>
       </form>
     </section>
