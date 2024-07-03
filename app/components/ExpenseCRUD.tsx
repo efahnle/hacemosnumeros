@@ -22,7 +22,7 @@ export const ExpenseCrud: React.FC<ExpenseCrudProps> = ({ onInputChange, prePaye
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-    setAmount(isNaN(value) ? 0 : value); // Ensure amount is a valid number or fallback to 0
+    setAmount(isNaN(value) ? '' : value); // Ensure amount is a valid number or fallback to 0
     onInputChange('amount', value);
   };
 
