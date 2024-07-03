@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import ExpensesTable from '@/app/components/ExpensesTable';
 import ButtonBar from '@/app/components/ButtonBar'
 import Modal from '../components/Modal';
+import { archivo } from '@/app/ui/fonts';
 
 
 const ExpensesDashboardPage = () => {
@@ -78,7 +79,7 @@ const ExpensesDashboardPage = () => {
 
   return (
     <main className="flex flex-col items-center p-20 min-w-32">
-      <h1 className="flex text-center break-normal items-center text-2xl md:text-3xl lg:text-5xl ">Cargá los gastos</h1>
+      <h1 className={`${archivo.className}flex text-center break-normal text-nowrap items-center text-3xl md:text-3xl lg:text-5xl `}>Gastos</h1>
       <ExpensesTable expenses={expenses} onDelete={handleDelete} onModify={handleModify} />
       <ButtonBar onButtonClick={handleButtonClick} />
       <div>

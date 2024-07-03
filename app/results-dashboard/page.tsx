@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import ResultsTable from '@/app/components/ResultsTable';
 import ResultsBar from '@/app/components/ResultsBar';
-import ResultsAlgorithm from '@/app/components/ResultsAlgorithm';
+import { archivo } from '@/app/ui/fonts';
 import calculateResults from '@/app/components/ResultsAlgorithm';
 
 
@@ -57,7 +57,7 @@ const ResultsDashboardPage = () => {
 
   return (
     <main className="flex flex-col items-center p-12 min-w-32">
-      <h1 className="flex text-center break-normal items-center text-3xl md:text-3xl lg:text-5xl ">¡Hicimos números!</h1>
+      <h1 className={`${archivo.className} flex text-center break-normal pt-20 items-center text-3xl md:text-3xl lg:text-5xl`}>¡Hicimos números!</h1>
       <ResultsTable debtMap={result}/>
       <ResultsBar onButtonClick={handleButtonClick}/>
 

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { archivo } from '@/app/ui/fonts';
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -13,11 +15,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onConfirm, title, messag
   if (!isOpen) return null;
   console.log(simplifyStatus)
 
+  //{`${archivo.className} flex text-center break-normal items-center lg:text-5xl text-2xl md:text-3xl mb-8`}>
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="bg-white p-8 rounded shadow-lg z-10">
-        <h2 className="text-xl font-bold mb-4">{title}</h2>
+        <h2 className={`${archivo.className} text-xl font-bold mb-4`}>{title}</h2>
         <p className='text-red-700 mb-8'>
            Se recomienda tener habilitada la función Simplificar. Podés tildarla en la barra de abajo
         </p>

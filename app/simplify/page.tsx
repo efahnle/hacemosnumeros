@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center p-6 md:p-8 lg:p-10 xl:p-12  min-w-32">
       <div>
-        <h1 className={`${archivo.className} flex text-center break-normal items-center lg:text-5xl text-2xl md:text-3xl mb-8`}>
+        <h1 className={`${archivo.className} flex text-center break-normal items-center pt-20 lg:text-5xl text-2xl md:text-3xl mb-8`}>
           ¿Qué es "Simplificar"?
         </h1>
       </div>
