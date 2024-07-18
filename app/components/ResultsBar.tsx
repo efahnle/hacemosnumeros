@@ -16,12 +16,9 @@ const ResultsBar: React.FC<ResultsBarProps> = ({ onButtonClick }) => {
           >
             <AiOutlineLeft/>
           </button>
-          <button
-            onClick={() => onButtonClick(3)}
-            className="bg-green-500 px-4 py-2 rounded hover:bg-green-700"
-          >
+          <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share" className='bg-green-500 px-4 py-2 rounded hover:bg-green-700'>
             <FaWhatsapp />
-          </button>
+          </a>
         </div>
       );
 }
