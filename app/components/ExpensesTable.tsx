@@ -26,7 +26,7 @@ const ExpensesTable: React.FC<ExpensesTableProps> = ({ expenses, onDelete, onMod
       <table className="min-w-full bg-white border border-gray-200">
         <thead>
           <tr>
-            <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Persona</th>
+            <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Pagó</th>
             <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Descripción</th>
             <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Involucrados</th>
             <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Gasto</th>
