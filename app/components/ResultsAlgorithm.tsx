@@ -49,6 +49,8 @@ export default function calculateResults(expenses: Expense[], simplify: Boolean)
 
 function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
   const balances: Balance[] = [];
+  // console.info(debtMap);
+  // console.info(balances);
   for (const person_a in debtMap) {
     //console.log(person_a);
 
@@ -57,10 +59,10 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
     for (const person_b in debtMap[person_a]) {
       if (debtMap[person_a][person_b] > 0) {
         // person_a OWES person_b $N 
-        //console.log(person_a + " owes " + person_b + " $" + debtMap[person_a][person_b])
+        //console.log("a " + person_a + " owes " + person_b + " $" + debtMap[person_a][person_b])
       } else {
         // person_b OWES person_a $n
-        //console.log(person_b + " owes " + person_a + " $" + Math.abs(debtMap[person_a][person_b]))
+        //console.log("b " + person_b + " owes " + person_a + " $" + Math.abs(debtMap[person_a][person_b]))
       }
 
       person_a_balance += debtMap[person_a][person_b];
@@ -74,44 +76,73 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
 
     //console.log(balance);
     balances.push(balance)
+    //console.log(balances);
   }
 
-
-  console.log(balances);
+  //console.log("prebalances");
+  console.log("Final Balances:", JSON.stringify(balances, null, 2));
+  //console.log(balances);
+  //console.dir(balances, { depth: null });
 
   const creditors = balances.filter((creditor) => creditor.amount < 0);
-  console.log(creditors);
+  console.log("Creditors: ", JSON.stringify(creditors, null,2));
 
   const debtors = balances.filter((debtor) => debtor.amount > 0);
-  console.log(debtors);
+  console.log("debtors: ", JSON.stringify(debtors, null,2));
 
 
   // iterate over all creditors, and assign debtors one by one 
-  const creditors_length = creditors.length;
   const debtors_length = debtors.length;
 
+  let max_escape = 0;
   const simplifiedDebtMap: Record<string, Record<string, number>> = {};
-  for (let i = 0; i < creditors_length; i++) {
+  for (let i = 0; i < creditors.length; i++) {
     
-    let j = 0
+    const j = 0
     while (creditors[i].amount != 0) {
-      console.log("doing cred " + creditors[i].person)
+      console.log("doing cred " + creditors[i].person, creditors[i].amount)
       if (!simplifiedDebtMap[creditors[i].person]) simplifiedDebtMap[creditors[i].person] = {};
       if (!simplifiedDebtMap[debtors[j].person]) simplifiedDebtMap[debtors[j].person] = {};
 
       if (Math.abs(creditors[i].amount) >= Math.abs(debtors[j].amount)) {
         // Send entire amount from debtor to creditor
-        console.log("doing debt " + debtors[i].person)
+        // All the debt is assigned to the same creditor and we remove the debtor from the list
+        console.log("doing debt " + debtors[j].person)
+
+        // Record payments, both ways
         simplifiedDebtMap[creditors[i].person][debtors[j].person] = - Math.abs(debtors[j].amount);
         simplifiedDebtMap[debtors[j].person][creditors[i].person] = Math.abs(debtors[j].amount);
+
+        // Decrease from the creditor. This could either be partial or total
         creditors[i].amount += Math.abs(debtors[j].amount)
+
+        // Clear out the debtor, as we've already assign his expense to a creditor successfully
         debtors.splice(j, 1);
         
       } else {
         // The entire debt is more than what the creditor must receive. the debt must be splitted
+        // Here this debtor pays 100% of what the creditor had to receive, and sets the difference to find another creditor the next loop
+        console.log("doing debt split " + debtors[j].person)
+        const difference = Math.abs(debtors[j].amount) - Math.abs(creditors[i].amount);
+        console.log(difference)
+
+        // Record payments, both ways
+        simplifiedDebtMap[creditors[i].person][debtors[j].person] = - Math.abs(creditors[i].amount);
+        simplifiedDebtMap[debtors[j].person][creditors[i].person] = Math.abs(creditors[i].amount);
+
+        // Clear out the creditor
+        creditors[i].amount = 0;
+
+        // Assign the difference to the debtor for the next iteration
+        debtors[j].amount = difference;
+        break;
+        
       }
       //j++;
-      
+      max_escape++;
+      if (max_escape > 100){
+        break;
+      }
     }
 
   }
