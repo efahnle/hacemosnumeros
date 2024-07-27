@@ -48,8 +48,14 @@ const ResultsDashboardPage = () => {
 
   };
 
+
+  const getSimplify = () => {
+    return Boolean(global.localStorage.getItem('simplify'));
+  }
+
+
   const getExpenses = () => {
-    const tmp_expenses = localStorage.getItem('expenses');
+    let tmp_expenses = global.localStorage.getItem("expenses");
     if (tmp_expenses) {
       return JSON.parse(tmp_expenses);
     } else {
@@ -57,13 +63,7 @@ const ResultsDashboardPage = () => {
     }
   }
 
-
-  const getSimplify = () => {
-    return Boolean(localStorage.getItem('simplify'));
-  }
-
   const expenses = getExpenses();
-  //const names = getNames();
   const simplify = getSimplify();
 
   const result = calculateResults(expenses, simplify);

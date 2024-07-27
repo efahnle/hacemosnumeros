@@ -38,7 +38,7 @@ export default function calculateResults(expenses: Expense[], simplify: Boolean)
 
   if (simplify) {
     const debtsSimplified = simplifyDebts(debtMap);
-    //console.log(debtsSimplified);
+    console.log(simplify);
     return debtsSimplified
   } else {
     return debtMap;
@@ -89,10 +89,6 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
 
   const debtors = balances.filter((debtor) => debtor.amount > 0);
   console.log("debtors: ", JSON.stringify(debtors, null,2));
-
-
-  // iterate over all creditors, and assign debtors one by one 
-  const debtors_length = debtors.length;
 
   let max_escape = 0;
   const simplifiedDebtMap: Record<string, Record<string, number>> = {};
