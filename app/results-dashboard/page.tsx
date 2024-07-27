@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import ResultsTable from '@/app/components/ResultsTable';
 import ResultsBar from '@/app/components/ResultsBar';
 import { archivo } from '@/app/ui/fonts';
-import calculateResults from '@/app/components/ResultsAlgorithm';
+import calculateResults from '@/app/lib/ResultsAlgorithm';
 
 
 const ResultsDashboardPage = () => {

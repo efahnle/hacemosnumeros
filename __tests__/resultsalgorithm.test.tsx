@@ -1,4 +1,5 @@
-import calculateResults from "@/app/components/ResultsAlgorithm";
+import calculateResults from "@/app/lib/ResultsAlgorithm";
+import initialize_debtmap from "@/app/lib/DebtMapInitializer";
 
 interface Expense {
     payer: string;
@@ -20,14 +21,14 @@ describe('Results algorithm', () => {
         const expenses: Expense[] = [];
         expenses.push(expense);
 
-        const expectedDebtMap : DebtMap = {}
-        expectedDebtMap["eric"] = {};
-        expectedDebtMap["meli"] = {};
+        const expectedDebtMap : DebtMap = initialize_debtmap(expense.participants)
         expectedDebtMap["eric"]["meli"] = -50;
         expectedDebtMap["meli"]["eric"] = 50;
 
         const results = calculateResults(expenses, false);
-
+        console.log(expectedDebtMap)
+        console.log(results)
+        
         expect(results).toStrictEqual(expectedDebtMap);
     })
 

@@ -1,3 +1,5 @@
+import initialize_debtmap from "@/app/lib/DebtMapInitializer";
+
 interface Expense {
   payer: string;
   amount: number;
@@ -13,7 +15,10 @@ interface Balance {
 type DebtMap = Record<string, Record<string, number>>;
 
 export default function calculateResults(expenses: Expense[], simplify: Boolean) {
-  const debtMap: DebtMap = {};
+  const all_participants = expenses.flatMap(expense => expense.participants);
+  const unique_participants = Array.from(new Set(all_participants));
+  const debtMap: DebtMap = initialize_debtmap(unique_participants);
+  
 
   expenses.forEach(expense => {
     const { payer, amount, participants } = expense;
@@ -21,8 +26,6 @@ export default function calculateResults(expenses: Expense[], simplify: Boolean)
 
     participants.forEach(participant => {
       if (participant !== payer) {
-        if (!debtMap[participant]) debtMap[participant] = {};
-        if (!debtMap[payer]) debtMap[payer] = {};
 
         if (!debtMap[participant][payer]) debtMap[participant][payer] = 0;
         if (!debtMap[payer][participant]) debtMap[payer][participant] = 0;
@@ -49,14 +52,12 @@ export default function calculateResults(expenses: Expense[], simplify: Boolean)
 
 function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
   const balances: Balance[] = [];
-  // console.info(debtMap);
-  // console.info(balances);
   for (const person_a in debtMap) {
-    //console.log(person_a);
 
     let person_a_balance = 0;
 
     for (const person_b in debtMap[person_a]) {
+      /*
       if (debtMap[person_a][person_b] > 0) {
         // person_a OWES person_b $N 
         //console.log("a " + person_a + " owes " + person_b + " $" + debtMap[person_a][person_b])
@@ -64,25 +65,19 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
         // person_b OWES person_a $n
         //console.log("b " + person_b + " owes " + person_a + " $" + Math.abs(debtMap[person_a][person_b]))
       }
-
+      */
       person_a_balance += debtMap[person_a][person_b];
     }
 
-    //console.log(person_a + " net balance:" + person_a_balance);
     const balance: Balance = {
       person: person_a,
       amount: person_a_balance
     }
 
-    //console.log(balance);
     balances.push(balance)
-    //console.log(balances);
   }
 
-  //console.log("prebalances");
   console.log("Final Balances:", JSON.stringify(balances, null, 2));
-  //console.log(balances);
-  //console.dir(balances, { depth: null });
 
   const creditors = balances.filter((creditor) => creditor.amount < 0);
   console.log("Creditors: ", JSON.stringify(creditors, null,2));
@@ -91,15 +86,17 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
   console.log("debtors: ", JSON.stringify(debtors, null,2));
 
   let max_escape = 0;
-  const simplifiedDebtMap: Record<string, Record<string, number>> = {};
+
+  const all_participants = balances.map(balance => balance.person);
+  const unique_participants = Array.from(new Set(all_participants));
+  const simplifiedDebtMap: DebtMap = initialize_debtmap(unique_participants);
+  
   for (let i = 0; i < creditors.length; i++) {
     
     const j = 0
     while (creditors[i].amount != 0) {
       console.log("doing cred " + creditors[i].person, creditors[i].amount)
-      if (!simplifiedDebtMap[creditors[i].person]) simplifiedDebtMap[creditors[i].person] = {};
-      if (!simplifiedDebtMap[debtors[j].person]) simplifiedDebtMap[debtors[j].person] = {};
-
+      
       if (Math.abs(creditors[i].amount) >= Math.abs(debtors[j].amount)) {
         // Send entire amount from debtor to creditor
         // All the debt is assigned to the same creditor and we remove the debtor from the list
@@ -134,7 +131,6 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
         break;
         
       }
-      //j++;
       max_escape++;
       if (max_escape > 100){
         break;
@@ -144,6 +140,6 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
   }
 
   return simplifiedDebtMap;
-  //return debtMap;
+  
 
 };
