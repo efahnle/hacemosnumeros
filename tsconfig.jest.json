@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@/components/*": ["components/*"],
+        "@/pages/*": ["pages/*"]
+      },
+      "jsx": "react-jsx",
+      "types": ["jest", "node"]
+    }
+  }
+  
