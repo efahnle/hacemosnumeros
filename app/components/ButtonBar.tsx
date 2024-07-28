@@ -1,5 +1,5 @@
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlinePlus, AiOutlineCheck } from 'react-icons/ai'; // Import an icon from react-icons
 
@@ -30,22 +30,10 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ onButtonClick }) => {
         onClick={() => onButtonClick(1)}
         className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700"
       >
-        <AiOutlinePlus/>
+        <AiOutlinePlus />
       </button>
-      <div className="flex items-center space-x-2">
-        <input
-          type="checkbox"
-          id="radioButton"
-          checked={isRadioOn}
-          onChange={handleRadioChange}
-          className="form-checkbox h-5 w-5 text-green-500"
-        />
-        <Link href="/simplify" className="text-blue-300 underline">
-          Simplificar (?)
-        </Link>
-      </div>
       <button
-        onClick={() => onButtonClick(3)}
+        onClick={() => onButtonClick(2)}
         className="bg-green-500 px-4 py-2 rounded hover:bg-green-700"
       >
         <AiOutlineCheck />

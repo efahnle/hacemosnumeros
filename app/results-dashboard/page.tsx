@@ -49,9 +49,7 @@ const ResultsDashboardPage = () => {
   };
 
 
-  const getSimplify = () => {
-    return Boolean(global.localStorage.getItem('simplify'));
-  }
+
 
 
   const getExpenses = () => {
@@ -64,9 +62,9 @@ const ResultsDashboardPage = () => {
   }
 
   const expenses = getExpenses();
-  const simplify = getSimplify();
+  //const simplify = getSimplify();
 
-  const result = calculateResults(expenses, simplify);
+  const result = calculateResults(expenses);
   //console.log(result);
 
 

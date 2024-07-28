@@ -14,7 +14,7 @@ interface Balance {
 
 type DebtMap = Record<string, Record<string, number>>;
 
-export default function calculateResults(expenses: Expense[], simplify: Boolean) {
+export default function calculateResults(expenses: Expense[]) {
   const all_participants = expenses.flatMap(expense => expense.participants);
   const unique_participants = Array.from(new Set(all_participants));
   const debtMap: DebtMap = initialize_debtmap(unique_participants);
@@ -37,17 +37,10 @@ export default function calculateResults(expenses: Expense[], simplify: Boolean)
   });
 
   //console.log(debtMap);
+  const debtsSimplified = simplifyDebts(debtMap);
+  return debtsSimplified
 
-
-  if (simplify) {
-    const debtsSimplified = simplifyDebts(debtMap);
-    console.log(simplify);
-    return debtsSimplified
-  } else {
-    return debtMap;
   }
-
-}
 
 
 function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
@@ -90,7 +83,7 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
   const all_participants = balances.map(balance => balance.person);
   const unique_participants = Array.from(new Set(all_participants));
   const simplifiedDebtMap: DebtMap = initialize_debtmap(unique_participants);
-  
+
   for (let i = 0; i < creditors.length; i++) {
     
     const j = 0

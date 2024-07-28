@@ -25,10 +25,10 @@ describe('Results algorithm', () => {
         expectedDebtMap["eric"]["meli"] = -50;
         expectedDebtMap["meli"]["eric"] = 50;
 
-        const results = calculateResults(expenses, false);
+        const results = calculateResults(expenses);
         console.log(expectedDebtMap)
         console.log(results)
-        
+
         expect(results).toStrictEqual(expectedDebtMap);
     })
 
