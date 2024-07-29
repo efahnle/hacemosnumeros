@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { FormEvent } from 'react';
-import useTagInput from "../hooks/useTag";
+import useTagInput from "../hooks/useTagInput";
 import { TagField } from "../ui/TagField";
 
 export const FormPage = () => {

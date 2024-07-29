@@ -74,7 +74,7 @@ const ExpensesDashboardPage = () => {
             <ExpensesTable expenses={expenses} onDelete={handleDelete} onModify={handleModify} />
             <AddExpenseButton onButtonClick={handleButtonClick} />
           </div>
-          <ButtonBar onButtonClick={handleButtonClick} />
+          <ButtonBar onButtonClick={handleButtonClick} loading={loading} />
         </>
       )}
     </main>

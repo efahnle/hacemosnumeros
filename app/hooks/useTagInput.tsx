@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 const useTagInput = (maxTags = 5) => {
   const [tags, setTags] = useState<string[]>([]);
+  
 
   // Load initial tags from localStorage if they exist
   useEffect(() => {
@@ -10,7 +11,7 @@ const useTagInput = (maxTags = 5) => {
       setTags(JSON.parse(storedTags));
     }
   }, []);
-  
+
   const handleAddTag = (newTag: string) => {
     const newTags = newTag
       .split(',')
