@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const useTagInput = (maxTags = 5) => {
   const [tags, setTags] = useState<string[]>([]);
 
+  // Load initial tags from localStorage if they exist
+  useEffect(() => {
+    const storedTags = localStorage.getItem('names');
+    if (storedTags) {
+      setTags(JSON.parse(storedTags));
+    }
+  }, []);
+  
   const handleAddTag = (newTag: string) => {
     const newTags = newTag
       .split(',')

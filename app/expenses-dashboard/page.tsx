@@ -1,14 +1,17 @@
 'use client'
 
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import ExpensesTable from '@/app/components/ExpensesTable';
 import ButtonBar from '@/app/components/ButtonBar'
 import { archivo } from '@/app/ui/fonts';
 import AddExpenseButton from '@/app/components/AddExpenseButton';
+import LoadingSpinner from '@/app/components/LoadingSpinner';
 
 
 
 const ExpensesDashboardPage = () => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   //const [isModalOpen, setIsModalOpen] = useState(false);
   //const [modalAction, setModalAction] = useState<() => void>(() => { });
@@ -46,6 +49,8 @@ const ExpensesDashboardPage = () => {
   };
 
   const handleButtonClick = (buttonIndex: number) => {
+    setLoading(true);
+
     if (buttonIndex === 1) {
       // edit people / group
       router.push('/');
@@ -59,13 +64,19 @@ const ExpensesDashboardPage = () => {
 
   return (
     <main className="flex flex-col items-center p-20 min-w-32">
-      <h1 className={`${archivo.className}flex text-center break-normal text-nowrap items-center text-3xl md:text-3xl lg:text-5xl `}>Gastos</h1>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <h1 className={`${archivo.className}flex text-center break-normal text-nowrap items-center text-3xl md:text-3xl lg:text-5xl `}>Gastos</h1>
 
-      <div>
-        <ExpensesTable expenses={expenses} onDelete={handleDelete} onModify={handleModify} />
-        <AddExpenseButton onButtonClick={handleButtonClick} />
-      </div>
-      <ButtonBar onButtonClick={handleButtonClick} />
+          <div>
+            <ExpensesTable expenses={expenses} onDelete={handleDelete} onModify={handleModify} />
+            <AddExpenseButton onButtonClick={handleButtonClick} />
+          </div>
+          <ButtonBar onButtonClick={handleButtonClick} />
+        </>
+      )}
     </main>
   );
 };

@@ -6,7 +6,7 @@ interface AddExpenseButtonProps {
 
 const AddExpenseButton: React.FC<AddExpenseButtonProps> = ({ onButtonClick }) => {
     return (
-        <div className="flex justify-end items-center w-full h-full px-2  py-8 text-white">
+        <div className="flex justify-end items-center w-full h-full px-2  py-8 text-white text-xs lg:text-lg">
             <button
                 onClick={() => onButtonClick(3)}
                 className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700 flex items-center space-x-2"
