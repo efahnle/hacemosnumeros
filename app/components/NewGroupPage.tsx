@@ -5,14 +5,14 @@ import { FormEvent, useState } from 'react';
 import useTagInput from "../hooks/useTagInput";
 import { TagField } from "../ui/TagField";
 
-export const FormPage = () => {
+export const NewGroupPage = () => {
   const MAX_TAGS = 50;
   const MIN_TAGS = 2;
   const router = useRouter();
 
   const { tags, handleAddTag, handleRemoveTag } = useTagInput(MAX_TAGS);
-  const [groupName, setGroupName] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // State for error message
+  const [ groupName, setGroupName ] = useState('');
+  const [ errorMessage, setErrorMessage ] = useState(''); // State for error message
 
 
   const handleSubmit = (event: FormEvent) => {

@@ -1,5 +1,6 @@
 import { archivo } from '@/app/ui/fonts';
-import { FormPage } from './components/NewGroupPage';
+import { NewGroupPage } from '@/app/components/NewGroupPage';
+import { PreviousGroupsPage } from '@/app/components/PreviousGroupsPage';
 
 //import Image from "next/image";
 export default function Home() {
@@ -10,9 +11,12 @@ export default function Home() {
           ¿Hacemos números?
         </h1>
       </div>
+      <div>
+        <PreviousGroupsPage/>
+      </div>
       <div className='w-full '>
         <div className='text-center w-full object-top lg:text-2xl md:text-1xl items-center py-6 px-4'>
-          <FormPage />
+          <NewGroupPage />
         </div>
       </div>
     </main>
