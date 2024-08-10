@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { archivo } from '@/app/ui/fonts';
-import { ExpenseCrud } from '../components/ExpenseCRUD';
-import ConfirmCancelBar from '../components/ConfirmCancelBar';
+import { ExpenseCrud } from '@/app/components/ExpenseCRUD';
+import ConfirmCancelBar from '@/app/components/ConfirmCancelBar';
 
 export default function Home() {
   const router = useRouter();
@@ -26,14 +26,16 @@ export default function Home() {
     console.log(`Button ${buttonIndex} clicked`);
     if (buttonIndex === 1) {
       // User cancelled, go back
-      router.push('/expenses-dashboard');
+      //TODO: Add index
+      router.push('/expenses');
     }
 
     if (buttonIndex === 2) {
       // User confirmed, validate input and save in localStorage
       if (validateExpenseData(expenseData)) {
         appendExpenseToLocalStorage(expenseData);
-        router.push('/expenses-dashboard');
+        //TODO: Add index
+        router.push('/expenses');
       } else {
         alert('Por favor, completá todos los campos');
       }

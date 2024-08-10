@@ -9,7 +9,7 @@ export const PreviousGroupsPage = () => {
   const router = useRouter();
 
   const handleRowClick = (index: number) => {
-    router.push(`/expenses-dashboard/${index}`);
+    router.push(`/expenses/${index}`);
   };
 
   console.log(groups);
@@ -19,7 +19,7 @@ export const PreviousGroupsPage = () => {
     <>
       {groups && groups.length > 0 && (
         <div>
-          <div className='text-center mt-8'>Juntadas anteriores</div>
+          <div className='text-center mt-8 text-xl md:text-3xl lg:text-5xl'>Juntadas anteriores</div>
           <div className="w-full overflow-x-auto text-center object-top text-xs sm:text-l md:text-2xl items-center p-2 mt-12">
             <table className="min-w-full bg-white border-gray-300">
               <tbody>

@@ -20,6 +20,7 @@ const ExpensesDashboardPage = () => {
 
   //const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
   const loadExpenses = () => {
+    // TODO: Add the logic here to retrieve only the expenses from the corresponding id
     const tmp_expenses = localStorage.getItem('expenses');
     if (tmp_expenses) {
       return JSON.parse(tmp_expenses);
@@ -55,7 +56,7 @@ const ExpensesDashboardPage = () => {
       // edit people / group
       router.push('/');
     } else if (buttonIndex === 2) {
-      router.push('/results-dashboard');
+      router.push('/results');
     } else if (buttonIndex === 3) {
       router.push('/add-expense');
     }

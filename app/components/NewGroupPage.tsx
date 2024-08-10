@@ -11,8 +11,8 @@ export const NewGroupPage = () => {
   const router = useRouter();
 
   const { tags, handleAddTag, handleRemoveTag } = useTagInput(MAX_TAGS);
-  const [ groupName, setGroupName ] = useState('');
-  const [ errorMessage, setErrorMessage ] = useState(''); // State for error message
+  const [groupName, setGroupName] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // State for error message
 
 
   const handleSubmit = (event: FormEvent) => {
@@ -25,7 +25,8 @@ export const NewGroupPage = () => {
       console.log("Group Name:", groupName); // Log the group name
       console.log("Tags:", tags); // Log the tags
       localStorage.setItem('names', JSON.stringify(tags));
-      router.push('/expenses-dashboard');
+      // TODO: Add here the new index inserted in the expenses list
+      router.push('/expenses');
     }
   };
 
@@ -34,6 +35,9 @@ export const NewGroupPage = () => {
 
   return (
     <div>
+      <div className='text-center mt-8 text-xl md:text-3xl lg:text-5xl'>
+        Crea una nueva juntada
+      </div>
       <div>
         <p className="text-center object-top lg:text-2xl md:text-1xl items-center px-12 py-6">
           Ponele un nombre a la juntada
@@ -74,7 +78,7 @@ export const NewGroupPage = () => {
           <button
             type="submit"
             className={`pd-4 h-10 mt-4 items-center justify-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 ${tags.length < MIN_TAGS ? "opacity-50 cursor-not-allowed" : ""}`}
-            
+
           >
             Comenzar
           </button>

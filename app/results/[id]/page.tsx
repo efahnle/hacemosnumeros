@@ -12,10 +12,10 @@ const ResultsDashboardPage = () => {
   const handleButtonClick = (buttonIndex: number, debtmap?: Record<string, Record<string, number>>) => {
     if (buttonIndex === 1) {
       // Go back, user must edit an expense
-      router.push('/expenses-dashboard');
+      //TODO: Add index
+      router.push('/expenses');
     }
     if (buttonIndex === 2) {
-      // Export???
       console.log(debtmap);
       let header = "*¡Hicimos números!*\n\n"
 

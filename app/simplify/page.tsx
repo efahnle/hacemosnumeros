@@ -7,7 +7,8 @@ export default function Home() {
   const router = useRouter();
 
   const handleBackClick = () => {
-    router.push('/expenses-dashboard');
+    //TODO: Add index
+    router.push('/expenses');
   };
 
   return (

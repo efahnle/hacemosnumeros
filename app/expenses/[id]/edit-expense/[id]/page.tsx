@@ -3,10 +3,13 @@
 import { useRouter, useParams } from 'next/navigation';
 import { useState } from 'react';
 import { archivo } from '@/app/ui/fonts';
-import { ExpenseCrud } from '../../components/ExpenseCRUD';
-import ConfirmCancelBar from '../../components/ConfirmCancelBar';
+import { ExpenseCrud } from '../../../../components/ExpenseCRUD';
+import ConfirmCancelBar from '../../../../components/ConfirmCancelBar';
 
 export default function Home() {
+  // TODO: Rename
+  // TODO: Edit expense only of that group
+
   const router = useRouter();
   const params = useParams<{id: string}>();
   //console.log(params);
@@ -38,7 +41,8 @@ export default function Home() {
     console.log(`Button ${buttonIndex} clicked`);
     if (buttonIndex === 1) {
       // User cancelled, go back
-      router.push('/expenses-dashboard');
+      //TODO: Add index
+      router.push('/expenses');
       
     }
 
@@ -46,7 +50,8 @@ export default function Home() {
       // User confirmed, validate input and save in localStorage
       if (validateExpenseData(expenseData)) {
         updateExpenseInLocalStorage(expenseData);
-        router.push('/expenses-dashboard');
+        //TODO: Add index
+        router.push('/expenses');
       } else {
         alert('Por favor, completá todos los campos');
       }
