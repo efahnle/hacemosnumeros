@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import { AiOutlineDown, AiOutlineUp, AiOutlineUser, AiOutlineTeam } from "react-icons/ai";
+import { DebtMap } from '@/app/interfaces/Interfaces';
 
 
-interface DebtMap {
-  [key: string]: {
-    [key: string]: number;
-  };
-}
 
 interface ResultsTableProps {
   debtMap: DebtMap;

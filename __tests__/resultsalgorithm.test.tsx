@@ -1,12 +1,6 @@
 import calculateResults from "@/app/lib/ResultsAlgorithm";
 import initialize_debtmap from "@/app/lib/DebtMapInitializer";
-
-interface Expense {
-    payer: string;
-    amount: number;
-    description: string;
-    participants: string[];
-}
+import { ExpenseItem as Expense } from "@/app/interfaces/Interfaces";
 
 type DebtMap = Record<string, Record<string, number>>;
 
@@ -16,8 +10,11 @@ describe('Results algorithm', () => {
             payer: "eric",
             amount: 100,
             description: "vino",
-            participants: ["eric", "meli"]
+            participants: ['']
         }
+        expense.participants.push("eric");
+        expense.participants.push("meli");
+        
         const expenses: Expense[] = [];
         expenses.push(expense);
 

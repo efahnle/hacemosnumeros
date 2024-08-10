@@ -1,13 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
-
-interface ExpenseItem {
-    payer: string;
-    description: string;
-    participants: [string];
-    amount: number;
-  }
+import { ExpenseItem } from "@/app/interfaces/Interfaces"
 
 export const usePreviousGroups = () => {
     const [groups, setGroups] = useState<ExpenseItem[]>([]);

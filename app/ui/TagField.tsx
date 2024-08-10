@@ -1,13 +1,8 @@
 import { useState, ChangeEvent } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { iTag } from "@/app/interfaces/Interfaces";
 
 
-interface iTag {
-  tags: string[];
-  addTag: (tag: string) => void;
-  removeTag: (tag: string) => void;
-  maxTags: number;
-}
 
 export const TagField = ({ tags, addTag, removeTag, maxTags }: iTag) => {
   const [userInput, setUserInput] = useState<string>("");

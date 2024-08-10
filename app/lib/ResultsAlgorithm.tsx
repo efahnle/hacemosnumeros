@@ -1,16 +1,7 @@
 import initialize_debtmap from "@/app/lib/DebtMapInitializer";
+import { ExpenseItem as Expense , Balance} from "@/app/interfaces/Interfaces";
 
-interface Expense {
-  payer: string;
-  amount: number;
-  description: string;
-  participants: string[];
-}
 
-interface Balance {
-  person: string;
-  amount: number;
-}
 
 type DebtMap = Record<string, Record<string, number>>;
 
