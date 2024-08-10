@@ -11,7 +11,7 @@ export default function Home() {
           ¿Hacemos números?
         </h1>
       </div>
-      <div>
+      <div className='w-full'>
         <PreviousGroupsPage/>
       </div>
       <div className='w-full '>

@@ -78,7 +78,6 @@ export const NewGroupPage = () => {
           >
             Comenzar
           </button>
-          {/* Conditionally render the error message */}
           {errorMessage && (
             <p className="text-red-500 text-sm mt-2">
               {errorMessage}
