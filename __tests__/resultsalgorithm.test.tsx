@@ -10,11 +10,10 @@ describe('Results algorithm', () => {
             payer: "eric",
             amount: 100,
             description: "vino",
-            participants: ['']
+            participants: ['eric']
         }
-        expense.participants.push("eric");
         expense.participants.push("meli");
-        
+
         const expenses: Expense[] = [];
         expenses.push(expense);
 
