@@ -3,8 +3,8 @@
 import { useRouter, useParams } from 'next/navigation';
 import { useState } from 'react';
 import { archivo } from '@/app/ui/fonts';
-import { ExpenseCrud } from '../../../../components/ExpenseCRUD';
-import ConfirmCancelBar from '../../../../components/ConfirmCancelBar';
+import { ExpenseCrud } from '@/app/components/ExpenseCRUD';
+import ConfirmCancelBar from '@/app/components/ConfirmCancelBar';
 
 export default function Home() {
   // TODO: Rename

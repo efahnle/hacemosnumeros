@@ -2,8 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
-import useTagInput from "../hooks/useTagInput";
-import { TagField } from "../ui/TagField";
+import useTagInput from "@/app/hooks/useTagInput";
+import { TagField } from "@/app/ui/TagField";
+import { initializeDataForNewGroup } from "@/app/lib/LocalStorageWrapper"
 
 export const NewGroupPage = () => {
   const MAX_TAGS = 50;
@@ -23,15 +24,12 @@ export const NewGroupPage = () => {
     } else {
       setErrorMessage(''); // Clear any existing error message
       console.log("Group Name:", groupName); // Log the group name
-      console.log("Tags:", tags); // Log the tags
-      localStorage.setItem('names', JSON.stringify(tags));
-      // TODO: Add here the new index inserted in the expenses list
-      router.push('/expenses');
+      console.log("Names:", tags); // Log the tags
+      const index = initializeDataForNewGroup(groupName, tags);
+
+      router.push('/expenses/' + index);
     }
   };
-
-
-  const isButtonDisabled = groupName.trim() === '' || tags.length < MIN_TAGS;
 
   return (
     <div>

@@ -1,35 +1,29 @@
 'use client'
 
-import { useRouter } from 'next/navigation';
+import { useRouter,useParams } from 'next/navigation';
 import { useState } from 'react';
 import ExpensesTable from '@/app/components/ExpensesTable';
 import ButtonBar from '@/app/components/ButtonBar'
 import { archivo } from '@/app/ui/fonts';
 import AddExpenseButton from '@/app/components/AddExpenseButton';
 import LoadingSpinner from '@/app/components/LoadingSpinner';
+import { getDataInIndex } from '@/app/lib/LocalStorageWrapper'
 
 
 
 const ExpensesDashboardPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const params = useParams<{id: string}>();
   //const [isModalOpen, setIsModalOpen] = useState(false);
   //const [modalAction, setModalAction] = useState<() => void>(() => { });
   //const [simplifyStatus, setSimplifyStatus] = useState(false);
 
 
   //const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
-  const loadExpenses = () => {
-    // TODO: Add the logic here to retrieve only the expenses from the corresponding id
-    const tmp_expenses = localStorage.getItem('expenses');
-    if (tmp_expenses) {
-      return JSON.parse(tmp_expenses);
-    } else {
-      return [];
-    }
-  }
 
-  const expenses = loadExpenses();
+
+  const expenses = getDataInIndex(Number(params['id']))
 
 
 
@@ -42,10 +36,9 @@ const ExpensesDashboardPage = () => {
     location.reload();
   };
 
-  const handleModify = (id: number) => {
-    // Placeholder for modifying an expense item
-    console.log(`Modify expense with id: ${id}`);
-    const url = '/edit-expense/' + id.toString()
+  const handleModify = (expense_id: number) => {
+    console.log(`Modify expense with id: ${expense_id}`);
+    const url = '/expenses' + params['id'] + '/edit-expense/' + expense_id.toString()
     router.push(url);
   };
 
