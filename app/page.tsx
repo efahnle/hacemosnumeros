@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center py-20 px-4 min-w-32">
       <div>
-        <h1 className={`${archivo.className}flex text-center break-normal text-nowrap items-center text-3xl md:text-3xl lg:text-5xl `}>
+        <h1 className={`${archivo.className}flex text-center break-normal text-nowrap items-center text-3xl md:text-4xl lg:text-5xl `}>
           ¿Hacemos números?
         </h1>
       </div>

@@ -22,3 +22,9 @@ export interface iTag {
     removeTag: (tag: string) => void;
     maxTags: number;
 }
+
+export interface Group {
+    group_name: string;
+    names: string[];
+    expenses: ExpenseItem[];
+}

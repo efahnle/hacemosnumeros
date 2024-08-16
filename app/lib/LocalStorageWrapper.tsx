@@ -35,3 +35,10 @@ export function deleteExpenseInGroup(expense_index: number, group_index: number 
     let saved_data = tmp_saved_data ? JSON.parse(tmp_saved_data) : [];
     saved_data[group_index]['expenses'].delete(expense_index);
 }
+
+
+export function getPreviousGroups() {
+    const tmp_saved_data = localStorage.getItem(LOCAL_STORAGE_KEY);
+    let saved_data = tmp_saved_data ? JSON.parse(tmp_saved_data) : [];
+    return saved_data;
+}

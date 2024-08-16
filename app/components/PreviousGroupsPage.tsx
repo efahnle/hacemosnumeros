@@ -12,14 +12,14 @@ export const PreviousGroupsPage = () => {
     router.push(`/expenses/${index}`);
   };
 
-  console.log(groups);
+  //console.log(groups);
 
 
   return (
     <>
       {groups && groups.length > 0 && (
         <div>
-          <div className='text-center mt-8 text-xl md:text-3xl lg:text-5xl'>Juntadas anteriores</div>
+          <div className='text-center mt-8 text-xl md:text-3xl'>Juntadas anteriores</div>
           <div className="w-full overflow-x-auto text-center object-top text-xs sm:text-l md:text-2xl items-center p-2 mt-12">
             <table className="min-w-full bg-white border-gray-300">
               <tbody>
@@ -29,8 +29,8 @@ export const PreviousGroupsPage = () => {
                     onClick={() => handleRowClick(index)}
                     className="cursor-pointer hover:bg-gray-100" // Add hover effect if needed
                   >
-                    <td className="px-1 py-0.5 border-y">{group.payer}</td>
-                    <td className="px-1 py-0.5 border-y">Donde hubieron {group.participants.length} gastos</td>
+                    <td className="px-1 py-0.5 border-y">{group.group_name}</td>
+                    <td className="px-1 py-0.5 border-y">Donde hubieron {group.expenses.length} gastos</td>
                   </tr>
                 ))}
               </tbody>
