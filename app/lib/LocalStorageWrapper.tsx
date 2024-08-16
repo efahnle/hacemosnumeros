@@ -1,44 +1,53 @@
 "use client"
 
-const LOCAL_STORAGE_KEY = "data"
+import { ExpenseItem } from "@/app/interfaces/Interfaces";
 
-export function initializeDataForNewGroup(groupName: string, names: string[]) : number {
-    const tmp_saved_data = localStorage.getItem(LOCAL_STORAGE_KEY);
-    let saved_data = tmp_saved_data ? JSON.parse(tmp_saved_data) : [];
-    const new_data = {
-        'group_name': groupName,
-        'names': names,
-        'expenses': []
-    }
+const LOCAL_STORAGE_KEY = "data";
 
-    const data_length = saved_data.length;
 
-    if (saved_data) {
-        saved_data.push(new_data)
-    } else {
-        saved_data = [new_data]
-    }
 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(saved_data));
-    return data_length;
+interface GroupData {
+  group_name: string;
+  names: string[];
+  expenses: ExpenseItem[]; 
 }
 
-export function getDataInIndex(index: number) {
-    const tmp_saved_data = localStorage.getItem(LOCAL_STORAGE_KEY);
-    let saved_data = tmp_saved_data ? JSON.parse(tmp_saved_data) : [];
-    return saved_data[index];
+function getSavedData(): GroupData[] {
+  const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+  return savedData ? JSON.parse(savedData) : [];
 }
 
-
-export function deleteExpenseInGroup(expense_index: number, group_index: number ){
-    const tmp_saved_data = localStorage.getItem(LOCAL_STORAGE_KEY);
-    let saved_data = tmp_saved_data ? JSON.parse(tmp_saved_data) : [];
-    saved_data[group_index]['expenses'].delete(expense_index);
+function saveData(data: GroupData[]): void {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
 }
 
+export function initializeDataForNewGroup(groupName: string, names: string[]): number {
+  const savedData = getSavedData();
+  const newGroup: GroupData = {
+    group_name: groupName,
+    names,
+    expenses: []
+  };
 
-export function getPreviousGroups() {
-    const tmp_saved_data = localStorage.getItem(LOCAL_STORAGE_KEY);
-    let saved_data = tmp_saved_data ? JSON.parse(tmp_saved_data) : [];
-    return saved_data;
+  savedData.push(newGroup);
+  saveData(savedData);
+  
+  return savedData.length - 1; // Return the index of the newly added group
+}
+
+export function getDataInIndex(index: number): GroupData | undefined {
+  const savedData = getSavedData();
+  return savedData[index];
+}
+
+export function deleteExpenseInGroup(expenseIndex: number, groupIndex: number): void {
+  const savedData = getSavedData();
+  if (savedData[groupIndex]) {
+    savedData[groupIndex].expenses.splice(expenseIndex, 1);
+    saveData(savedData);
+  }
+}
+
+export function getPreviousGroups(): GroupData[] {
+  return getSavedData();
 }

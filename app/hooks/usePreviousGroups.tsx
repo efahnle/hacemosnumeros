@@ -16,5 +16,5 @@ export const usePreviousGroups = () => {
         }
     }, []);
 
-    return {groups, setGroups}
+    return {groups}
 }

@@ -4,7 +4,7 @@ import { usePreviousGroups } from '@/app/hooks/usePreviousGroups';
 import { useRouter } from 'next/navigation';
 
 export const PreviousGroupsPage = () => {
-  const { groups, setGroups } = usePreviousGroups();
+  const { groups } = usePreviousGroups();
 
   const router = useRouter();
 
@@ -12,9 +12,7 @@ export const PreviousGroupsPage = () => {
     router.push(`/expenses/${index}`);
   };
 
-  //console.log(groups);
-
-
+  
   return (
     <>
       {groups && groups.length > 0 && (

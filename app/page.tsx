@@ -2,7 +2,6 @@ import { archivo } from '@/app/ui/fonts';
 import { NewGroupPage } from '@/app/components/NewGroupPage';
 import { PreviousGroupsPage } from '@/app/components/PreviousGroupsPage';
 
-//import Image from "next/image";
 export default function Home() {
   return (
     <main className="flex flex-col items-center py-20 px-4 min-w-32">
