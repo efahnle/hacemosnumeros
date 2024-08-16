@@ -5,23 +5,15 @@ import { useState } from 'react';
 import { archivo } from '@/app/ui/fonts';
 import { ExpenseCrud } from '@/app/components/ExpenseCRUD';
 import ConfirmCancelBar from '@/app/components/ConfirmCancelBar';
+import { getExpenseFromGroup, updateExpenseInGroup } from '@/app/lib/LocalStorageWrapper';
+import { ExpenseItem } from '@/app/interfaces/Interfaces';
 
-export default function Home() {
-  // TODO: Rename
-  // TODO: Edit expense only of that group
-
+export default function EditExpense() {
+  
   const router = useRouter();
-  const params = useParams<{id: string}>();
-  //console.log(params);
+  const params = useParams<{group_id: string, expense_id: string}>();
 
-  const getExpenseFromLocalStorage = (index: number) => {
-    const existingExpenses = localStorage.getItem('expenses');
-    let expenses = existingExpenses ? JSON.parse(existingExpenses) : [];
-    //console.log(expenses[index])
-    return expenses[index]
-  };
-
-  const expenseObject = getExpenseFromLocalStorage(Number(params['id']))
+  const expenseObject = getExpenseFromGroup(Number(params['expense_id']), Number(params['group_id']))
 
   const [expenseData, setExpenseData] = useState({
     payer: expenseObject.payer,
@@ -41,17 +33,22 @@ export default function Home() {
     console.log(`Button ${buttonIndex} clicked`);
     if (buttonIndex === 1) {
       // User cancelled, go back
-      //TODO: Add index
-      router.push('/expenses');
-      
-    }
+      router.push('/expenses/' + params['group_id']);
+    } 
 
     if (buttonIndex === 2) {
       // User confirmed, validate input and save in localStorage
       if (validateExpenseData(expenseData)) {
-        updateExpenseInLocalStorage(expenseData);
-        //TODO: Add index
-        router.push('/expenses');
+        const newExpense: ExpenseItem = {
+          payer: expenseData.payer,
+          amount: expenseData.amount,
+          description: expenseData.description,
+          participants: expenseData.participants
+        }
+
+        updateExpenseInGroup(Number(params['expense_id']), Number(params['group_id']),newExpense)
+
+        router.push('/expenses/' + params['group_id']);
       } else {
         alert('Por favor, completá todos los campos');
       }
@@ -59,12 +56,6 @@ export default function Home() {
   };
 
   const validateExpenseData = (data: typeof expenseData) => {
-
-    console.log(data.payer)
-    console.log(data.amount)
-    console.log(data.participants)
-    console.log(data.description)
-    
     return (
       data.payer &&
       data.amount > 0 &&
@@ -72,18 +63,6 @@ export default function Home() {
       data.description
     );
   };
-
-
-  const updateExpenseInLocalStorage = (newExpense: typeof expenseData) => {
-    const existingExpenses = localStorage.getItem('expenses');
-    let expenses = existingExpenses ? JSON.parse(existingExpenses) : [];
-
-    expenses.splice(Number(params['id']), 1)
-    const updatedExpenses = expenses.toSpliced(Number(params['id']),0,newExpense)
-
-    localStorage.setItem('expenses', JSON.stringify(updatedExpenses));
-  };
-
 
 
   return (

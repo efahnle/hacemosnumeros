@@ -8,7 +8,7 @@ import ConfirmCancelBar from '@/app/components/ConfirmCancelBar';
 import { addExpenseToGroup } from '@/app/lib/LocalStorageWrapper';
 import { ExpenseItem } from '@/app/interfaces/Interfaces';
 
-export default function Home() {
+export default function AddExpense() {
   const router = useRouter();
   const params = useParams<{group_id: string}>();
 
