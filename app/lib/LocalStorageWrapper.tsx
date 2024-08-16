@@ -72,3 +72,9 @@ export function updateExpenseInGroup(expenseIndex: number, groupIndex: number, n
         console.error(`Expense at index ${expenseIndex} in group ${groupIndex} does not exist.`);
     }
 }
+
+
+export function getNamesInGroup(groupIndex: number): string[] {
+    const group_data = getDataInIndex(groupIndex);
+    return group_data.names;
+}

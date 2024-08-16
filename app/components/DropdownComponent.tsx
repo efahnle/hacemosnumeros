@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { useParams } from 'next/navigation';
+import { getNamesInGroup } from '@/app/lib/LocalStorageWrapper';
 
 interface DropdownComponentProps {
   multiSelect?: boolean;
@@ -8,18 +10,19 @@ interface DropdownComponentProps {
 }
 
 const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = false, onSelect, prePayer, preParticipants }) => {
+  const params = useParams<{group_id: string}>();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [options, setOptions] = useState<string[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const storedOptions = localStorage.getItem('names');
+    const storedOptions = getNamesInGroup(Number(params['group_id']));
 
     
 
     if (storedOptions) {
-      setOptions(JSON.parse(storedOptions));
+      setOptions(storedOptions);
     }
 
     if (prePayer) {
