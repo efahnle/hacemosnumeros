@@ -1,13 +1,17 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { useState } from 'react';
 import { archivo } from '@/app/ui/fonts';
 import { ExpenseCrud } from '@/app/components/ExpenseCRUD';
 import ConfirmCancelBar from '@/app/components/ConfirmCancelBar';
+import { addExpenseToGroup } from '@/app/lib/LocalStorageWrapper';
+import { ExpenseItem } from '@/app/interfaces/Interfaces';
 
 export default function Home() {
   const router = useRouter();
+  const params = useParams<{group_id: string}>();
+
   const [expenseData, setExpenseData] = useState({
     payer: '',
     amount: 0,
@@ -26,16 +30,22 @@ export default function Home() {
     console.log(`Button ${buttonIndex} clicked`);
     if (buttonIndex === 1) {
       // User cancelled, go back
-      //TODO: Add index
-      router.push('/expenses');
+      router.push('/expenses/' + params['group_id']);
     }
 
     if (buttonIndex === 2) {
       // User confirmed, validate input and save in localStorage
       if (validateExpenseData(expenseData)) {
-        appendExpenseToLocalStorage(expenseData);
-        //TODO: Add index
-        router.push('/expenses');
+        const newExpense: ExpenseItem = {
+          payer: expenseData.payer,
+          amount: expenseData.amount,
+          description: expenseData.description,
+          participants: expenseData.participants
+        }
+
+        addExpenseToGroup(newExpense, Number(params['group_id']));
+
+        router.push('/expenses/' + params['group_id']);
       } else {
         alert('Por favor, completá todos los campos');
       }
@@ -53,14 +63,7 @@ export default function Home() {
   };
 
 
-  const appendExpenseToLocalStorage = (newExpense: typeof expenseData) => {
-    const existingExpenses = localStorage.getItem('expenses');
-    let expenses = existingExpenses ? JSON.parse(existingExpenses) : [];
 
-    expenses.push(newExpense);
-
-    localStorage.setItem('expenses', JSON.stringify(expenses));
-  };
 
   return (
     <main className="flex flex-col items-center p-20 min-w-32">

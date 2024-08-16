@@ -1,7 +1,7 @@
 export interface ExpenseItem {
     payer: string;
     description: string;
-    participants: [string];
+    participants: string[];
     amount: number;
 }
 

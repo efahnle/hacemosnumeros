@@ -35,7 +35,7 @@ const ExpensesDashboardPage = () => {
 
   const handleModify = (expense_id: number) => {
     console.log(`Modify expense with id: ${expense_id}`);
-    const url = '/expenses' + params['group_id'] + '/edit-expense/' + expense_id.toString()
+    const url = '/expenses/' + params['group_id'] + '/edit-expense/' + expense_id.toString()
     router.push(url);
   };
 

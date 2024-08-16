@@ -44,3 +44,14 @@ export function deleteExpenseInGroup(expenseIndex: number, groupIndex: number): 
 export function getPreviousGroups(): Group[] {
   return getSavedData();
 }
+
+export function addExpenseToGroup(expense: ExpenseItem, groupIndex: number): void {
+    const savedData = getSavedData();
+    
+    if (savedData[groupIndex]) {
+      savedData[groupIndex].expenses.push(expense);
+      saveData(savedData);
+    } else {
+      console.error(`Group at index ${groupIndex} does not exist.`);
+    }
+}
