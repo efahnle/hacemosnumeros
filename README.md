@@ -48,6 +48,6 @@ En [http://localhost:3000](http://localhost:3000) estará el sitio.
 2. Realizar los cambios.
 3. Verificar un buen funcionamiento de la aplicación completa y sobre todo en los componentes que se están modificando.
 4. Ejecutar la suite de pruebas `npm test` y de ser necesario, agregar nuevos casos de prueba bajo el directorio `__tests__`.
-5. Crear un [pull request](https://github.com/efahnle/hacemosnumeros/compare) de esa branch contra `main`para su revisión. Cuánto más completo esté el mismo, más fácil será su revision. Dejar evidencia de, cómo mínimo, la ejecución de los tests indicada en el paso anterior.
+5. Crear un [pull request](https://github.com/efahnle/hacemosnumeros/compare) de esa branch contra `main` para su revisión. Cuánto más completo esté el mismo, más fácil será su revision. Dejar evidencia de, cómo mínimo, la ejecución de los tests indicada en el paso anterior.
 6. Mencionarme (@efahnle) para que revise y haga el merge.
 
