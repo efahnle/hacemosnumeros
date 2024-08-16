@@ -3,6 +3,7 @@
 import React from 'react';
 
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'; // Import an icon from react-icons
+import { Group } from '@/app/interfaces/Interfaces';
 
 
 // Define a type for the expense items
@@ -15,12 +16,12 @@ interface ExpenseItem {
 
 // Define the props for the ExpensesTable component
 interface ExpensesTableProps {
-  expenses: ExpenseItem[];
+  data: Group;
   onDelete: (id: number) => void;
   onModify: (id: number) => void;
 }
 
-const ExpensesTable: React.FC<ExpensesTableProps> = ({ expenses, onDelete, onModify }) => {
+const ExpensesTable: React.FC<ExpensesTableProps> = ({ data, onDelete, onModify }) => {
   return (
     <div className="overflow-x-auto text-center object-top  text-xs sm:text-l md:text-2xl  items-center p-2 mt-12">
       <table className="min-w-full bg-white border border-gray-200">
@@ -34,7 +35,7 @@ const ExpensesTable: React.FC<ExpensesTableProps> = ({ expenses, onDelete, onMod
           </tr>
         </thead>
         <tbody>
-          {expenses && expenses.map((expense, index) => (
+          {data.expenses && data.expenses.map((expense, index) => (
             <tr key={index}>
               <td className="px-1 py-0.5 border-b">{expense.payer}</td>
               <td className="px-1 py-0.5 border-b">{expense.description}</td>

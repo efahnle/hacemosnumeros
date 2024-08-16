@@ -7,14 +7,14 @@ import ButtonBar from '@/app/components/ButtonBar'
 import { archivo } from '@/app/ui/fonts';
 import AddExpenseButton from '@/app/components/AddExpenseButton';
 import LoadingSpinner from '@/app/components/LoadingSpinner';
-import { getDataInIndex } from '@/app/lib/LocalStorageWrapper'
+import { getDataInIndex, deleteExpenseInGroup } from '@/app/lib/LocalStorageWrapper'
 
 
 
 const ExpensesDashboardPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const params = useParams<{id: string}>();
+  const params = useParams<{group_id: string}>();
   //const [isModalOpen, setIsModalOpen] = useState(false);
   //const [modalAction, setModalAction] = useState<() => void>(() => { });
   //const [simplifyStatus, setSimplifyStatus] = useState(false);
@@ -22,23 +22,20 @@ const ExpensesDashboardPage = () => {
 
   //const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
 
-
-  const expenses = getDataInIndex(Number(params['id']))
+  const groupData = getDataInIndex(Number(params['group_id']))
+  //console.log(groupData);
 
 
 
   const handleDelete = (index: number) => {
     console.log(`should delete expense at index: ${index}`);
-    const existingExpenses = localStorage.getItem('expenses');
-    let expenses = existingExpenses ? JSON.parse(existingExpenses) : [];
-    expenses.splice(index, 1);
-    localStorage.setItem('expenses', JSON.stringify(expenses));
+    deleteExpenseInGroup(index, Number(params['group_id']));
     location.reload();
   };
 
   const handleModify = (expense_id: number) => {
     console.log(`Modify expense with id: ${expense_id}`);
-    const url = '/expenses' + params['id'] + '/edit-expense/' + expense_id.toString()
+    const url = '/expenses' + params['group_id'] + '/edit-expense/' + expense_id.toString()
     router.push(url);
   };
 
@@ -49,9 +46,9 @@ const ExpensesDashboardPage = () => {
       // edit people / group
       router.push('/');
     } else if (buttonIndex === 2) {
-      router.push('/results');
+      router.push('/results' + + params['group_id']);
     } else if (buttonIndex === 3) {
-      router.push('/add-expense');
+      router.push('/expenses/' + params['group_id'] + '/add-expense');
     }
   };
 
@@ -65,7 +62,7 @@ const ExpensesDashboardPage = () => {
           <h1 className={`${archivo.className}flex text-center break-normal text-nowrap items-center text-3xl md:text-3xl lg:text-5xl `}>Gastos</h1>
 
           <div>
-            <ExpensesTable expenses={expenses} onDelete={handleDelete} onModify={handleModify} />
+            <ExpensesTable data={groupData} onDelete={handleDelete} onModify={handleModify} />
             <AddExpenseButton onButtonClick={handleButtonClick} />
           </div>
           <ButtonBar onButtonClick={handleButtonClick} loading={loading} />

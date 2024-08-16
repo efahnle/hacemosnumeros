@@ -1,29 +1,22 @@
 "use client"
 
-import { ExpenseItem } from "@/app/interfaces/Interfaces";
+import { ExpenseItem, Group } from "@/app/interfaces/Interfaces";
 
 const LOCAL_STORAGE_KEY = "data";
 
 
-
-interface GroupData {
-  group_name: string;
-  names: string[];
-  expenses: ExpenseItem[]; 
-}
-
-function getSavedData(): GroupData[] {
+function getSavedData(): Group[] {
   const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
   return savedData ? JSON.parse(savedData) : [];
 }
 
-function saveData(data: GroupData[]): void {
+function saveData(data: Group[]): void {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
 }
 
 export function initializeDataForNewGroup(groupName: string, names: string[]): number {
   const savedData = getSavedData();
-  const newGroup: GroupData = {
+  const newGroup: Group = {
     group_name: groupName,
     names,
     expenses: []
@@ -35,7 +28,7 @@ export function initializeDataForNewGroup(groupName: string, names: string[]): n
   return savedData.length - 1; // Return the index of the newly added group
 }
 
-export function getDataInIndex(index: number): GroupData | undefined {
+export function getDataInIndex(index: number): Group  {
   const savedData = getSavedData();
   return savedData[index];
 }
@@ -48,6 +41,6 @@ export function deleteExpenseInGroup(expenseIndex: number, groupIndex: number): 
   }
 }
 
-export function getPreviousGroups(): GroupData[] {
+export function getPreviousGroups(): Group[] {
   return getSavedData();
 }
