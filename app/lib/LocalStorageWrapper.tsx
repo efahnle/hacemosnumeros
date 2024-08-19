@@ -1,18 +1,29 @@
-"use client"
+
 
 import { ExpenseItem, Group } from "@/app/interfaces/Interfaces";
+//import { cookies } from "next/headers";
 
 const LOCAL_STORAGE_KEY = "data";
 
+// Non exported internal functions
 
 function getSavedData(): Group[] {
-    const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
-    return savedData ? JSON.parse(savedData) : [];
+    if (typeof window !== 'undefined') {
+
+        const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+        //const savedData = cookies().get(LOCAL_STORAGE_KEY)
+        return savedData ? JSON.parse(savedData) : [];
+    }
+    return []; // Return an empty array if not in the client
 }
 
 function saveData(data: Group[]): void {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
+    //cookies().set(LOCAL_STORAGE_KEY, JSON.stringify(data));
 }
+
+
+// Public exported functions
 
 export function initializeDataForNewGroup(groupName: string, names: string[]): number {
     const savedData = getSavedData();
@@ -25,7 +36,7 @@ export function initializeDataForNewGroup(groupName: string, names: string[]): n
     savedData.push(newGroup);
     saveData(savedData);
 
-    return savedData.length - 1; // Return the index of the newly added group
+    return savedData.length - 1;
 }
 
 export function getDataInIndex(index: number): Group {

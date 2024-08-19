@@ -6,14 +6,6 @@ import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'; // Import an ic
 import { Group } from '@/app/interfaces/Interfaces';
 
 
-// Define a type for the expense items
-interface ExpenseItem {
-  payer: string;
-  description: string;
-  participants: [string];
-  amount: number;
-}
-
 // Define the props for the ExpensesTable component
 interface ExpensesTableProps {
   data: Group;
@@ -22,6 +14,47 @@ interface ExpensesTableProps {
 }
 
 const ExpensesTable: React.FC<ExpensesTableProps> = ({ data, onDelete, onModify }) => {
+  if (!data) {
+
+    return (
+      <div className="overflow-x-auto text-center object-top  text-xs sm:text-l md:text-2xl  items-center p-2 mt-12">
+        <table className="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr>
+              <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Pagó</th>
+              <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Descripción</th>
+              <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Involucrados</th>
+              <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Gasto</th>
+              <th className="px-1 py-0.5 sm:px-4 sm:py-2 lg:px-8  lg:py-4 border-b">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr key={0}>
+              <td className="px-1 py-0.5 border-b"></td>
+              <td className="px-1 py-0.5 border-b"></td>
+              <td className="px-1 py-0.5 border-b"></td>
+              <td className="px-1 py-0.5 border-b"></td>
+              <td className="px-1 py-0.5 border-b items-center ">
+                <button
+                  className="text-blue-500 hover:text-blue-700 px-3"
+                >
+                  <AiOutlineEdit />
+                </button>
+                <button
+                  className="text-red-500 hover:text-red-700 px-"
+                >
+                  <AiOutlineDelete />
+                </button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    );
+
+  }
   return (
     <div className="overflow-x-auto text-center object-top  text-xs sm:text-l md:text-2xl  items-center p-2 mt-12">
       <table className="min-w-full bg-white border border-gray-200">
@@ -46,13 +79,13 @@ const ExpensesTable: React.FC<ExpensesTableProps> = ({ data, onDelete, onModify 
                   onClick={() => onModify(index)}
                   className="text-blue-500 hover:text-blue-700 px-3"
                 >
-                  <AiOutlineEdit/>
+                  <AiOutlineEdit />
                 </button>
                 <button
                   onClick={() => onDelete(index)}
                   className="text-red-500 hover:text-red-700 px-"
                 >
-                  <AiOutlineDelete/>
+                  <AiOutlineDelete />
                 </button>
               </td>
             </tr>
