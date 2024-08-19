@@ -1,7 +1,4 @@
-
-
 import { ExpenseItem, Group } from "@/app/interfaces/Interfaces";
-//import { cookies } from "next/headers";
 
 const LOCAL_STORAGE_KEY = "data";
 
@@ -9,17 +6,14 @@ const LOCAL_STORAGE_KEY = "data";
 
 function getSavedData(): Group[] {
     if (typeof window !== 'undefined') {
-
         const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
-        //const savedData = cookies().get(LOCAL_STORAGE_KEY)
         return savedData ? JSON.parse(savedData) : [];
     }
-    return []; // Return an empty array if not in the client
+    return []; 
 }
 
 function saveData(data: Group[]): void {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
-    //cookies().set(LOCAL_STORAGE_KEY, JSON.stringify(data));
 }
 
 
@@ -55,7 +49,7 @@ export function getExpensesFromGroup(groupIndex: number): ExpenseItem[] {
         return group_data.expenses;
     } else {
         console.error(`Group at index ${groupIndex} does not exist.`);
-        return [];  // Return an empty array if the group doesn't exist
+        return [];
     }
 }
 
@@ -65,7 +59,7 @@ export function getExpenseFromGroup(expenseIndex: number, groupIndex: number): E
         return expenses[expenseIndex];
     } else {
         console.error(`Expense at index ${expenseIndex} in group ${groupIndex} does not exist.`);
-        return undefined;  // Return undefined if the expense doesn't exist
+        return undefined;
     }
 }
 
