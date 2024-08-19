@@ -73,6 +73,12 @@ export function getExpenseFromGroup(expenseIndex: number, groupIndex: number): E
     return group_data.expenses[expenseIndex];
 }
 
+
+export function getExpensesFromGroup(groupIndex: number): ExpenseItem[] {
+    const group_data = getDataInIndex(groupIndex)
+    return group_data.expenses;
+}
+
 export function updateExpenseInGroup(expenseIndex: number, groupIndex: number, newExpenseData: ExpenseItem): void {
     const savedData = getSavedData();
 
@@ -88,4 +94,10 @@ export function updateExpenseInGroup(expenseIndex: number, groupIndex: number, n
 export function getNamesInGroup(groupIndex: number): string[] {
     const group_data = getDataInIndex(groupIndex);
     return group_data.names;
+}
+
+
+export function getGroupNameInGroup(groupIndex: number): string {
+    const group_data = getDataInIndex(groupIndex);
+    return group_data.group_name;
 }

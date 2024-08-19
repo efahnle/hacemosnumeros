@@ -3,12 +3,14 @@ import { FaWhatsapp } from 'react-icons/fa'
 
 
 interface ResultsBarProps {
-  onButtonClick: (buttonIndex: number) => void;
+  onButtonClick: (buttonIndex: number, debtMap?: Record<string, Record<string, number>>, groupName?: string) => void;
   debtMap: Record<string, Record<string, number>>;
+  groupName: string;
 }
 
 
-const ResultsBar: React.FC<ResultsBarProps> = ({ onButtonClick , debtMap}) => {
+const ResultsBar: React.FC<ResultsBarProps> = ({ onButtonClick , debtMap, groupName}) => {
+  console.log("juntada: " + groupName);
     return (
         <div className="fixed bottom-0 left-0 w-full bg-gray-800 text-white py-4 flex justify-evenly">
           <button
@@ -18,7 +20,7 @@ const ResultsBar: React.FC<ResultsBarProps> = ({ onButtonClick , debtMap}) => {
             <AiOutlineLeft/>
           </button>
           <button
-            onClick={() => onButtonClick(2, debtMap)}
+            onClick={() => onButtonClick(2, debtMap, groupName)}
             className="bg-green-500 px-4 py-2 rounded hover:bg-green-700"
           >
             <FaWhatsapp />
