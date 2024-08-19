@@ -107,3 +107,11 @@ export function deleteExpenseInGroup(expenseIndex: number, groupIndex: number): 
         saveData(savedData);
     }
 }
+
+export function deleteGroup(groupIndex: number): void {
+    const savedData = getSavedData();
+    if (savedData[groupIndex]) {
+        savedData.splice(groupIndex, 1);
+        saveData(savedData);
+    }
+}
