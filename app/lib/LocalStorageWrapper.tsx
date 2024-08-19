@@ -16,6 +16,35 @@ function saveData(data: Group[]): void {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
 }
 
+function handleExpenseReassignmentOrDeletion(groupIndex: number, removedParticipants: string[]) {
+    // TODO: think this part in detail
+    /*
+    const savedData = getSavedData();
+
+    removedParticipants.forEach(participant => {
+        const groupExpenses = savedData[groupIndex].expenses;
+        const reassignedParticipant = prompt(`Seleccione un participante para reasignar los gastos de ${participant}, o deje vacío para eliminar estos gastos.`);
+
+        savedData[groupIndex].expenses = groupExpenses.map(expense => {
+            if (expense.payer === participant || expense.participants.includes(participant)) {
+                if (reassignedParticipant) {
+                    return {
+                        ...expense,
+                        payer: expense.payer === participant ? reassignedParticipant : expense.payer,
+                        participants: expense.participants.map(p => p === participant ? reassignedParticipant : p)
+                    };
+                } else {
+                    return null; // Mark for deletion
+                }
+            }
+            return expense;
+        }).filter(expense => expense !== null);
+    });
+
+    saveData(savedData);
+    */
+}
+
 
 // Public exported functions
 
@@ -84,6 +113,20 @@ export function updateExpenseInGroup(expenseIndex: number, groupIndex: number, n
     } else {
         console.error(`Expense at index ${expenseIndex} in group ${groupIndex} does not exist.`);
     }
+}
+
+export function updateGroupNameAndParticipants(groupIndex: number, newGroupName: string, newNames: string[], removedParticipants: string[]): void {
+    const savedData = getSavedData();
+
+    if (savedData[groupIndex]) {
+        savedData[groupIndex].group_name = newGroupName;
+        savedData[groupIndex].names = newNames;
+
+        saveData(savedData);
+    } else {
+        console.error(`Group at index ${groupIndex} does not exist.`);
+    }
+    handleExpenseReassignmentOrDeletion(groupIndex, removedParticipants);
 }
 
 

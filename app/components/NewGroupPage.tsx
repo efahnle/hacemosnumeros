@@ -11,7 +11,7 @@ export const NewGroupPage = () => {
   const MIN_TAGS = 2;
   const router = useRouter();
 
-  const { tags, handleAddTag, handleRemoveTag } = useTagInput(MAX_TAGS);
+  const { tags, setTags, handleAddTag, handleRemoveTag } = useTagInput(MAX_TAGS);
   const [groupName, setGroupName] = useState('');
   const [errorMessage, setErrorMessage] = useState(''); 
 
@@ -32,7 +32,7 @@ export const NewGroupPage = () => {
   return (
     <div>
       <div className='text-center mt-8 text-xl md:text-3xl lg:text-5xl'>
-        Crea una nueva juntada
+        Creá una nueva juntada
       </div>
       <div>
         <p className="text-center object-top lg:text-2xl md:text-1xl items-center px-12 py-6">

@@ -25,7 +25,7 @@ const useTagInput = (maxTags = 5) => {
   const handleRemoveTag = (tag: string) =>
     setTags(tags.filter((t) => t !== tag));
 
-  return { tags, handleAddTag, handleRemoveTag };
+  return { tags, setTags, handleAddTag, handleRemoveTag };
 };
 
 export default useTagInput;

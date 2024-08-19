@@ -14,6 +14,7 @@ export const PreviousGroupsPage = () => {
   const [groupToDelete, setGroupToDelete] = useState<number | null>(null);
 
   const handleRowClick = (index: number) => {
+    console.log("rowclick " + index)
     router.push(`/expenses/${index}`);
   };
 
@@ -64,7 +65,10 @@ export const PreviousGroupsPage = () => {
                     >
                       {group.group_name}
                     </td>
-                    <td className="px-1 py-0.5 border-y">{group.expenses.length} gastos</td>
+                    <td className="px-1 py-0.5 border-y"
+                      onClick={() => handleRowClick(index)}>
+                      {group.expenses.length} gastos
+                    </td>
                     <td className="px-1 py-0.5 border-y">
                       <button
                         className="text-blue-500 hover:underline mr-2"
@@ -73,7 +77,7 @@ export const PreviousGroupsPage = () => {
                           handleEditClick(index);
                         }}
                       >
-                        <AiOutlineEdit/>
+                        <AiOutlineEdit />
                       </button>
                       <button
                         className="text-red-500 hover:underline"
@@ -82,7 +86,7 @@ export const PreviousGroupsPage = () => {
                           handleDeleteClick(index);
                         }}
                       >
-                        <AiOutlineDelete/>
+                        <AiOutlineDelete />
                       </button>
                     </td>
                   </tr>
