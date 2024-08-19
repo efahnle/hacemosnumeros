@@ -22,8 +22,8 @@ describe('Results algorithm', () => {
         expectedDebtMap["meli"]["eric"] = 50;
 
         const results = calculateResults(expenses);
-        console.log(expectedDebtMap)
-        console.log(results)
+        //console.log(expectedDebtMap)
+        //console.log(results)
 
         expect(results).toStrictEqual(expectedDebtMap);
     })

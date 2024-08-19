@@ -30,7 +30,6 @@ export default function EditExpense() {
   };
 
   const handleButtonClick = (buttonIndex: number) => {
-    console.log(`Button ${buttonIndex} clicked`);
     if (buttonIndex === 1) {
       // User cancelled, go back
       router.push('/expenses/' + params['group_id']);

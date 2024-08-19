@@ -13,7 +13,7 @@ export const NewGroupPage = () => {
 
   const { tags, handleAddTag, handleRemoveTag } = useTagInput(MAX_TAGS);
   const [groupName, setGroupName] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // State for error message
+  const [errorMessage, setErrorMessage] = useState(''); 
 
 
   const handleSubmit = (event: FormEvent) => {
@@ -22,9 +22,7 @@ export const NewGroupPage = () => {
     if (groupName.trim() === '' || tags.length < MIN_TAGS) {
       setErrorMessage("Ponele un nombre a la juntada e ingresa al menos 2 participantes");
     } else {
-      setErrorMessage(''); // Clear any existing error message
-      console.log("Group Name:", groupName); // Log the group name
-      console.log("Names:", tags); // Log the tags
+      setErrorMessage(''); 
       const index = initializeDataForNewGroup(groupName, tags);
 
       router.push('/expenses/' + index);
@@ -51,8 +49,8 @@ export const NewGroupPage = () => {
               "Ejemplo: Cena en lo de Eric"
             }
             className="w-full border border-gray-300 rounded-md px-2 md:px-4 py-2"
-            value={groupName} // Bind the input value to state
-            onChange={(e) => setGroupName(e.target.value)} // Update state on input change
+            value={groupName} 
+            onChange={(e) => setGroupName(e.target.value)} 
 
           />
         </div>

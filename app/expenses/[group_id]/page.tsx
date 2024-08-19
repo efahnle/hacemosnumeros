@@ -12,7 +12,7 @@ import { Group } from '@/app/interfaces/Interfaces';
 
 const ExpensesDashboardPage = () => {
   const [loading, setLoading] = useState(false);
-  const [groupData, setGroupData] = useState<Group | null>(null); // State to hold group data
+  const [groupData, setGroupData] = useState<Group | null>(null); 
   const router = useRouter();
   const params = useParams<{ group_id: string }>();
 
@@ -24,13 +24,11 @@ const ExpensesDashboardPage = () => {
   }, [params]);
 
   const handleDelete = (index: number) => {
-    console.log(`should delete expense at index: ${index}`);
     deleteExpenseInGroup(index, Number(params['group_id']));
     location.reload();
   };
 
   const handleModify = (expense_id: number) => {
-    console.log(`Modify expense with id: ${expense_id}`);
     const url = '/expenses/' + params['group_id'] + '/edit-expense/' + expense_id.toString();
     router.push(url);
   };
@@ -65,7 +63,7 @@ const ExpensesDashboardPage = () => {
                 <AddExpenseButton onButtonClick={handleButtonClick} />
               </>
             ) : (
-              <LoadingSpinner /> // Display a loading state while data is being fetched
+              <LoadingSpinner />
             )}
           </div>
           <ButtonBar onButtonClick={handleButtonClick} loading={loading} />

@@ -2,11 +2,9 @@
 
 import React from 'react';
 
-import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'; // Import an icon from react-icons
+import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { Group } from '@/app/interfaces/Interfaces';
 
-
-// Define the props for the ExpensesTable component
 interface ExpensesTableProps {
   data: Group;
   onDelete: (id: number) => void;

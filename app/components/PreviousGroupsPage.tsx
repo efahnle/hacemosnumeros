@@ -25,7 +25,7 @@ export const PreviousGroupsPage = () => {
                   <tr
                     key={index}
                     onClick={() => handleRowClick(index)}
-                    className="cursor-pointer hover:bg-gray-100" // Add hover effect if needed
+                    className="cursor-pointer hover:bg-gray-100" 
                   >
                     <td className="px-1 py-0.5 border-y">{group.group_name}</td>
                     <td className="px-1 py-0.5 border-y">Donde hubieron {group.expenses.length} gastos</td>

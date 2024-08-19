@@ -27,7 +27,6 @@ export default function calculateResults(expenses: Expense[]) {
     });
   });
 
-  //console.log(debtMap);
   const debtsSimplified = simplifyDebts(debtMap);
   return debtsSimplified
 
@@ -61,14 +60,11 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
     balances.push(balance)
   }
 
-  console.log("Final Balances:", JSON.stringify(balances, null, 2));
-
+  
   const creditors = balances.filter((creditor) => creditor.amount < 0);
-  console.log("Creditors: ", JSON.stringify(creditors, null,2));
-
+  
   const debtors = balances.filter((debtor) => debtor.amount > 0);
-  console.log("debtors: ", JSON.stringify(debtors, null,2));
-
+  
   let max_escape = 0;
 
   const all_participants = balances.map(balance => balance.person);
@@ -79,13 +75,11 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
     
     const j = 0
     while (creditors[i].amount != 0) {
-      console.log("doing cred " + creditors[i].person, creditors[i].amount)
       
       if (Math.abs(creditors[i].amount) >= Math.abs(debtors[j].amount)) {
         // Send entire amount from debtor to creditor
         // All the debt is assigned to the same creditor and we remove the debtor from the list
-        console.log("doing debt " + debtors[j].person)
-
+        
         // Record payments, both ways
         simplifiedDebtMap[creditors[i].person][debtors[j].person] = - Math.abs(debtors[j].amount);
         simplifiedDebtMap[debtors[j].person][creditors[i].person] = Math.abs(debtors[j].amount);
@@ -99,10 +93,8 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
       } else {
         // The entire debt is more than what the creditor must receive. the debt must be splitted
         // Here this debtor pays 100% of what the creditor had to receive, and sets the difference to find another creditor the next loop
-        console.log("doing debt split " + debtors[j].person)
         const difference = Math.abs(debtors[j].amount) - Math.abs(creditors[i].amount);
-        console.log(difference)
-
+        
         // Record payments, both ways
         simplifiedDebtMap[creditors[i].person][debtors[j].person] = - Math.abs(creditors[i].amount);
         simplifiedDebtMap[debtors[j].person][creditors[i].person] = Math.abs(creditors[i].amount);

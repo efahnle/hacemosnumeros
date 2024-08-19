@@ -10,7 +10,6 @@ interface ResultsBarProps {
 
 
 const ResultsBar: React.FC<ResultsBarProps> = ({ onButtonClick , debtMap, groupName}) => {
-  console.log("juntada: " + groupName);
     return (
         <div className="fixed bottom-0 left-0 w-full bg-gray-800 text-white py-4 flex justify-evenly">
           <button

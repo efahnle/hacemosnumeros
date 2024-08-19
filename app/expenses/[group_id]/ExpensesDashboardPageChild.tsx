@@ -16,26 +16,15 @@ const ExpensesDashboardPageChild = (data : Group) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const params = useParams<{group_id: string}>();
-  //const [isModalOpen, setIsModalOpen] = useState(false);
-  //const [modalAction, setModalAction] = useState<() => void>(() => { });
-  //const [simplifyStatus, setSimplifyStatus] = useState(false);
-
-
-  //const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
-
+  
   const groupData = getDataInIndex(Number(params['group_id']))
-  console.log("groupdata:" + groupData);
-
-
-
+  
   const handleDelete = (index: number) => {
-    console.log(`should delete expense at index: ${index}`);
     deleteExpenseInGroup(index, Number(params['group_id']));
     location.reload();
   };
 
   const handleModify = (expense_id: number) => {
-    console.log(`Modify expense with id: ${expense_id}`);
     const url = '/expenses/' + params['group_id'] + '/edit-expense/' + expense_id.toString()
     router.push(url);
   };

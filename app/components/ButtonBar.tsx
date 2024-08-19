@@ -1,9 +1,9 @@
 import React from 'react';
-import { AiOutlineLeft, AiOutlineCheck, AiOutlineUser } from 'react-icons/ai'; // Import an icon from react-icons
+import { AiOutlineLeft, AiOutlineCheck, AiOutlineUser } from 'react-icons/ai';
 
 interface ButtonBarProps {
   onButtonClick: (buttonIndex: number) => void;
-  loading: boolean; // New prop to indicate loading state
+  loading: boolean;
 }
 
 const ButtonBar: React.FC<ButtonBarProps> = ({ onButtonClick, loading }) => {
