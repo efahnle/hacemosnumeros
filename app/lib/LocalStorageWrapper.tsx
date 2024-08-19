@@ -68,15 +68,24 @@ export function addExpenseToGroup(expense: ExpenseItem, groupIndex: number): voi
 }
 
 
-export function getExpenseFromGroup(expenseIndex: number, groupIndex: number): ExpenseItem {
+export function getExpensesFromGroup(groupIndex: number): ExpenseItem[] {
     const group_data = getDataInIndex(groupIndex);
-    return group_data.expenses[expenseIndex];
+    if (group_data) {
+        return group_data.expenses;
+    } else {
+        console.error(`Group at index ${groupIndex} does not exist.`);
+        return [];  // Return an empty array if the group doesn't exist
+    }
 }
 
-
-export function getExpensesFromGroup(groupIndex: number): ExpenseItem[] {
-    const group_data = getDataInIndex(groupIndex)
-    return group_data.expenses;
+export function getExpenseFromGroup(expenseIndex: number, groupIndex: number): ExpenseItem | undefined {
+    const group_data = getDataInIndex(groupIndex);
+    if (group_data && group_data.expenses[expenseIndex]) {
+        return group_data.expenses[expenseIndex];
+    } else {
+        console.error(`Expense at index ${expenseIndex} in group ${groupIndex} does not exist.`);
+        return undefined;  // Return undefined if the expense doesn't exist
+    }
 }
 
 export function updateExpenseInGroup(expenseIndex: number, groupIndex: number, newExpenseData: ExpenseItem): void {
@@ -91,13 +100,12 @@ export function updateExpenseInGroup(expenseIndex: number, groupIndex: number, n
 }
 
 
-export function getNamesInGroup(groupIndex: number): string[] {
+export function getNamesInGroup(groupIndex: number): string[] | undefined {
     const group_data = getDataInIndex(groupIndex);
-    return group_data.names;
+    return group_data ? group_data.names : undefined;
 }
 
-
-export function getGroupNameInGroup(groupIndex: number): string {
+export function getGroupNameInGroup(groupIndex: number): string | undefined {
     const group_data = getDataInIndex(groupIndex);
-    return group_data.group_name;
+    return group_data ? group_data.group_name : undefined;
 }

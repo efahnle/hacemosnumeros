@@ -5,7 +5,7 @@ import { FaWhatsapp } from 'react-icons/fa'
 interface ResultsBarProps {
   onButtonClick: (buttonIndex: number, debtMap?: Record<string, Record<string, number>>, groupName?: string) => void;
   debtMap: Record<string, Record<string, number>>;
-  groupName: string;
+  groupName: string | undefined;
 }
 
 
