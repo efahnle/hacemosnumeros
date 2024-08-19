@@ -39,34 +39,15 @@ export function initializeDataForNewGroup(groupName: string, names: string[]): n
     return savedData.length - 1;
 }
 
+// GETs
 export function getDataInIndex(index: number): Group {
     const savedData = getSavedData();
     return savedData[index];
 }
 
-export function deleteExpenseInGroup(expenseIndex: number, groupIndex: number): void {
-    const savedData = getSavedData();
-    if (savedData[groupIndex]) {
-        savedData[groupIndex].expenses.splice(expenseIndex, 1);
-        saveData(savedData);
-    }
-}
-
 export function getPreviousGroups(): Group[] {
     return getSavedData();
 }
-
-export function addExpenseToGroup(expense: ExpenseItem, groupIndex: number): void {
-    const savedData = getSavedData();
-
-    if (savedData[groupIndex]) {
-        savedData[groupIndex].expenses.push(expense);
-        saveData(savedData);
-    } else {
-        console.error(`Group at index ${groupIndex} does not exist.`);
-    }
-}
-
 
 export function getExpensesFromGroup(groupIndex: number): ExpenseItem[] {
     const group_data = getDataInIndex(groupIndex);
@@ -79,23 +60,12 @@ export function getExpensesFromGroup(groupIndex: number): ExpenseItem[] {
 }
 
 export function getExpenseFromGroup(expenseIndex: number, groupIndex: number): ExpenseItem | undefined {
-    const group_data = getDataInIndex(groupIndex);
-    if (group_data && group_data.expenses[expenseIndex]) {
-        return group_data.expenses[expenseIndex];
+    const expenses = getExpensesFromGroup(groupIndex);
+    if (expenses) {
+        return expenses[expenseIndex];
     } else {
         console.error(`Expense at index ${expenseIndex} in group ${groupIndex} does not exist.`);
         return undefined;  // Return undefined if the expense doesn't exist
-    }
-}
-
-export function updateExpenseInGroup(expenseIndex: number, groupIndex: number, newExpenseData: ExpenseItem): void {
-    const savedData = getSavedData();
-
-    if (savedData[groupIndex] && savedData[groupIndex].expenses[expenseIndex]) {
-        savedData[groupIndex].expenses[expenseIndex] = newExpenseData;
-        saveData(savedData);
-    } else {
-        console.error(`Expense at index ${expenseIndex} in group ${groupIndex} does not exist.`);
     }
 }
 
@@ -108,4 +78,38 @@ export function getNamesInGroup(groupIndex: number): string[] | undefined {
 export function getGroupNameInGroup(groupIndex: number): string | undefined {
     const group_data = getDataInIndex(groupIndex);
     return group_data ? group_data.group_name : undefined;
+}
+
+//UPDATE
+export function updateExpenseInGroup(expenseIndex: number, groupIndex: number, newExpenseData: ExpenseItem): void {
+    const savedData = getSavedData();
+
+    if (savedData[groupIndex] && savedData[groupIndex].expenses[expenseIndex]) {
+        savedData[groupIndex].expenses[expenseIndex] = newExpenseData;
+        saveData(savedData);
+    } else {
+        console.error(`Expense at index ${expenseIndex} in group ${groupIndex} does not exist.`);
+    }
+}
+
+
+//ADD
+export function addExpenseToGroup(expense: ExpenseItem, groupIndex: number): void {
+    const savedData = getSavedData();
+
+    if (savedData[groupIndex]) {
+        savedData[groupIndex].expenses.push(expense);
+        saveData(savedData);
+    } else {
+        console.error(`Group at index ${groupIndex} does not exist.`);
+    }
+}
+
+//DELETE
+export function deleteExpenseInGroup(expenseIndex: number, groupIndex: number): void {
+    const savedData = getSavedData();
+    if (savedData[groupIndex]) {
+        savedData[groupIndex].expenses.splice(expenseIndex, 1);
+        saveData(savedData);
+    }
 }
