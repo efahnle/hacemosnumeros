@@ -102,7 +102,7 @@ export const PreviousGroupsPage = () => {
           <div className="bg-white p-6 rounded-md">
             <h2 className="text-xl mb-4">Confirmar eliminación</h2>
             <p>¿Estás seguro de que deseas eliminar esta juntada?</p>
-            <div className="mt-6 flex justify-end">
+            <div className="mt-6 flex justify-between">
               <button
                 className="px-4 py-2 bg-gray-300 rounded-md mr-2"
                 onClick={closeModal}
