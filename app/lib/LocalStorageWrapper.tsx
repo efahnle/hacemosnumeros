@@ -16,33 +16,26 @@ function saveData(data: Group[]): void {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
 }
 
+function updateGroupInIndex(groupIndex: number, group: Group){
+    let allgroups = getSavedData();
+    allgroups[groupIndex] = group;
+    saveData(allgroups);
+}
+
 function handleExpenseReassignmentOrDeletion(groupIndex: number, removedParticipants: string[]) {
-    // TODO: think this part in detail
-    /*
-    const savedData = getSavedData();
+    let newgroupdata = getDataInIndex(groupIndex);
+    const filteredExpenses = newgroupdata.expenses.filter(expense => !removedParticipants.includes(expense.payer));
 
-    removedParticipants.forEach(participant => {
-        const groupExpenses = savedData[groupIndex].expenses;
-        const reassignedParticipant = prompt(`Seleccione un participante para reasignar los gastos de ${participant}, o deje vacío para eliminar estos gastos.`);
-
-        savedData[groupIndex].expenses = groupExpenses.map(expense => {
-            if (expense.payer === participant || expense.participants.includes(participant)) {
-                if (reassignedParticipant) {
-                    return {
-                        ...expense,
-                        payer: expense.payer === participant ? reassignedParticipant : expense.payer,
-                        participants: expense.participants.map(p => p === participant ? reassignedParticipant : p)
-                    };
-                } else {
-                    return null; // Mark for deletion
-                }
-            }
-            return expense;
-        }).filter(expense => expense !== null);
+    const updatedExpenses = filteredExpenses.map(expense => {
+        const newParticipants = expense.participants.filter(participant => !removedParticipants.includes(participant));
+        return {
+            ...expense,
+            participants: newParticipants
+        };
     });
-
-    saveData(savedData);
-    */
+    newgroupdata.expenses = updatedExpenses;
+    
+    updateGroupInIndex(groupIndex,newgroupdata);
 }
 
 
