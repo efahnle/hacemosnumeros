@@ -1,5 +1,5 @@
 import initialize_debtmap from "@/app/lib/DebtMapInitializer";
-import { ExpenseItem as Expense , Balance} from "@/app/interfaces/Interfaces";
+import { ExpenseItem as Expense, Balance } from "@/app/interfaces/Interfaces";
 
 
 
@@ -7,17 +7,18 @@ type DebtMap = Record<string, Record<string, number>>;
 
 export default function calculateResults(expenses: Expense[]) {
   const all_participants = expenses.flatMap(expense => expense.participants);
-  const unique_participants = Array.from(new Set(all_participants));
+  const all_payers = expenses.flatMap(expense => expense.payer);
+  const all_possible_people = [ ...all_participants, ...all_payers];
+  const unique_participants = Array.from(new Set(all_possible_people));
   const debtMap: DebtMap = initialize_debtmap(unique_participants);
   
-
   expenses.forEach(expense => {
     const { payer, amount, participants } = expense;
     const share = amount / participants.length;
 
     participants.forEach(participant => {
       if (participant !== payer) {
-
+        
         if (!debtMap[participant][payer]) debtMap[participant][payer] = 0;
         if (!debtMap[payer][participant]) debtMap[payer][participant] = 0;
 
@@ -30,7 +31,7 @@ export default function calculateResults(expenses: Expense[]) {
   const debtsSimplified = simplifyDebts(debtMap);
   return debtsSimplified
 
-  }
+}
 
 
 function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
@@ -60,11 +61,11 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
     balances.push(balance)
   }
 
-  
+
   const creditors = balances.filter((creditor) => creditor.amount < 0);
-  
+
   const debtors = balances.filter((debtor) => debtor.amount > 0);
-  
+
   let max_escape = 0;
 
   const all_participants = balances.map(balance => balance.person);
@@ -72,14 +73,14 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
   const simplifiedDebtMap: DebtMap = initialize_debtmap(unique_participants);
 
   for (let i = 0; i < creditors.length; i++) {
-    
+
     const j = 0
     while (creditors[i].amount != 0) {
-      
+
       if (Math.abs(creditors[i].amount) >= Math.abs(debtors[j].amount)) {
         // Send entire amount from debtor to creditor
         // All the debt is assigned to the same creditor and we remove the debtor from the list
-        
+
         // Record payments, both ways
         simplifiedDebtMap[creditors[i].person][debtors[j].person] = - Math.abs(debtors[j].amount);
         simplifiedDebtMap[debtors[j].person][creditors[i].person] = Math.abs(debtors[j].amount);
@@ -89,12 +90,12 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
 
         // Clear out the debtor, as we've already assign his expense to a creditor successfully
         debtors.splice(j, 1);
-        
+
       } else {
         // The entire debt is more than what the creditor must receive. the debt must be splitted
         // Here this debtor pays 100% of what the creditor had to receive, and sets the difference to find another creditor the next loop
         const difference = Math.abs(debtors[j].amount) - Math.abs(creditors[i].amount);
-        
+
         // Record payments, both ways
         simplifiedDebtMap[creditors[i].person][debtors[j].person] = - Math.abs(creditors[i].amount);
         simplifiedDebtMap[debtors[j].person][creditors[i].person] = Math.abs(creditors[i].amount);
@@ -105,10 +106,10 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
         // Assign the difference to the debtor for the next iteration
         debtors[j].amount = difference;
         break;
-        
+
       }
       max_escape++;
-      if (max_escape > 100){
+      if (max_escape > 100) {
         break;
       }
     }
@@ -116,6 +117,6 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
   }
 
   return simplifiedDebtMap;
-  
+
 
 };
