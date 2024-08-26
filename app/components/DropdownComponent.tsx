@@ -10,7 +10,7 @@ interface DropdownComponentProps {
 }
 
 const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = false, onSelect, prePayer, preParticipants }) => {
-  const params = useParams<{group_id: string}>();
+  const params = useParams<{ group_id: string }>();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [options, setOptions] = useState<string[]>([]);
@@ -19,17 +19,17 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = fal
   useEffect(() => {
     const storedOptions = getNamesInGroup(Number(params['group_id']));
 
-    
+
 
     if (storedOptions) {
       setOptions(storedOptions);
     }
 
     if (prePayer) {
-        setSelectedOptions([prePayer]);
-    } 
+      setSelectedOptions([prePayer]);
+    }
     if (preParticipants && preParticipants.length > 0) {
-        setSelectedOptions(preParticipants);
+      setSelectedOptions(preParticipants);
     }
 
   }, []);
@@ -51,6 +51,17 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = fal
     }
     setSelectedOptions(updatedOptions);
     onSelect(multiSelect ? updatedOptions : option);
+  };
+
+
+  const handleSelectAll = () => {
+    if (selectedOptions.length === options.length) {
+      setSelectedOptions([]);
+      onSelect([]);
+    } else {
+      setSelectedOptions(options);
+      onSelect(options);
+    }
   };
 
   const renderSelectedOptions = () => {
@@ -99,6 +110,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = fal
 
       {isOpen && (
         <div
+          key={selectedOptions.join(',')}
           className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           aria-orientation="vertical"
@@ -106,10 +118,21 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = fal
           tabIndex={-1}
         >
           <div className="py-1" role="none">
-            {options.map((option, index) => (
+            {multiSelect && (
+              <button
+                className={`text-blue-700 text-center block px-4 py-2 text-sm w-full  hover:bg-gray-200 ${selectedOptions.length === options.length ? 'bg-gray-200' : ''}`}
+                role="menuitem"
+                tabIndex={-1}
+                onClick={handleSelectAll}
+              >
+                Todos
+              </button>
+            )}
+
+            {options.map((option) => (
               <button
                 key={`${option}-${selectedOptions.includes(option)}`}
-                className={`text-gray-700 block px-4 py-2 text-sm w-full text-left hover:bg-gray-200 ${selectedOptions.includes(option) ? 'bg-gray-200' : ''}`}
+                className={`text-gray-700 block px-4 py-2 text-sm w-full text-center  hover:bg-gray-200 ${selectedOptions.includes(option) ? 'bg-gray-200' : ''}`}
                 role="menuitem"
                 tabIndex={-1}
                 onClick={() => handleSelectOption(option)}
