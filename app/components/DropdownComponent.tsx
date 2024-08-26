@@ -108,8 +108,8 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = fal
           <div className="py-1" role="none">
             {options.map((option, index) => (
               <button
-                key={index}
-                className={`text-gray-700 block px-4 py-2 text-sm w-full text-left hover:bg-gray-100 ${selectedOptions.includes(option) ? 'bg-gray-200' : ''}`}
+                key={`${option}-${selectedOptions.includes(option)}`}
+                className={`text-gray-700 block px-4 py-2 text-sm w-full text-left hover:bg-gray-200 ${selectedOptions.includes(option) ? 'bg-gray-200' : ''}`}
                 role="menuitem"
                 tabIndex={-1}
                 onClick={() => handleSelectOption(option)}
