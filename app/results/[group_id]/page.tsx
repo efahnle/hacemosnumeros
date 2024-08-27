@@ -39,7 +39,7 @@ const ResultsDashboardPage = () => {
         }
       }
 
-      const footer = "\nHecho con ❤️ en hacemosnumeros.com.ar";
+      const footer = "\nHecho con ❤️ en hacemosnumeros.com";
       const message = `${header}${payerDetails}${footer}`;
       window.open(`whatsapp://send?text=${encodeURI(message)}`, '_blank');
     }

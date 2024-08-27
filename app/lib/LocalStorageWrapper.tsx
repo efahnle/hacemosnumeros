@@ -75,14 +75,9 @@ export function getExpensesFromGroup(groupIndex: number): ExpenseItem[] {
     }
 }
 
-export function getExpenseFromGroup(expenseIndex: number, groupIndex: number): ExpenseItem | undefined {
+export function getExpenseFromGroup(expenseIndex: number, groupIndex: number): ExpenseItem  {
     const expenses = getExpensesFromGroup(groupIndex);
-    if (expenses) {
-        return expenses[expenseIndex];
-    } else {
-        console.error(`Expense at index ${expenseIndex} in group ${groupIndex} does not exist.`);
-        return undefined;
-    }
+    return expenses[expenseIndex];
 }
 
 
