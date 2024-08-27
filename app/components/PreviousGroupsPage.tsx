@@ -46,53 +46,55 @@ export const PreviousGroupsPage = () => {
     <>
       {groups && groups.length > 0 && (
         <div>
-          <div className="text-center mt-8 text-xl md:text-3xl">Juntadas anteriores</div>
-          <div className="w-full overflow-x-auto text-center object-top text-xs sm:text-l md:text-2xl items-center p-2 mt-12">
-            <table className="min-w-full bg-white border-gray-300">
-              <thead>
-                <tr>
-                  <th className="px-1 py-0.5 border-y">Nombre</th>
-                  <th className="px-1 py-0.5 border-y">Gastos</th>
-                  <th className="px-1 py-0.5 border-y">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {groups.map((group, index) => (
-                  <tr key={index} className="hover:bg-gray-100">
-                    <td
-                      className="px-1 py-0.5 border-y cursor-pointer"
-                      onClick={() => handleRowClick(index)}
-                    >
-                      {group.group_name}
-                    </td>
-                    <td className="px-1 py-0.5 border-y"
-                      onClick={() => handleRowClick(index)}>
-                      {group.expenses.length} gastos
-                    </td>
-                    <td className="px-1 py-0.5 border-y">
-                      <button
-                        className="text-blue-500 hover:underline mr-2"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEditClick(index);
-                        }}
-                      >
-                        <AiOutlineEdit size={24} />
-                      </button>
-                      <button
-                        className="text-red-500 hover:underline"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteClick(index);
-                        }}
-                      >
-                        <AiOutlineDelete size={24}/>
-                      </button>
-                    </td>
+          <div className="text-left pb-6 mt-8 text-xl md:text-3xl">Juntadas anteriores</div>
+          <div className='border-2 rounded-md border-gray-700 px-2 pb-2'>
+            <div className="w-full overflow-x-auto text-center object-top text-xs sm:text-l md:text-2xl items-center p-2 mt-8">
+              <table className="min-w-full bg-white border-gray-300">
+                <thead>
+                  <tr>
+                    <th className="px-1 py-0.5 border-y">Nombre</th>
+                    <th className="px-1 py-0.5 border-y">Gastos</th>
+                    <th className="px-1 py-0.5 border-y">Acciones</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {groups.map((group, index) => (
+                    <tr key={index} className="hover:bg-gray-100">
+                      <td
+                        className="px-1 py-0.5 border-y cursor-pointer"
+                        onClick={() => handleRowClick(index)}
+                      >
+                        {group.group_name}
+                      </td>
+                      <td className="px-1 py-0.5 border-y"
+                        onClick={() => handleRowClick(index)}>
+                        {group.expenses.length} gastos
+                      </td>
+                      <td className="px-1 py-0.5 border-y">
+                        <button
+                          className="text-blue-500 hover:underline mr-2"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEditClick(index);
+                          }}
+                        >
+                          <AiOutlineEdit size={24} />
+                        </button>
+                        <button
+                          className="text-red-500 hover:underline"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteClick(index);
+                          }}
+                        >
+                          <AiOutlineDelete size={24} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}

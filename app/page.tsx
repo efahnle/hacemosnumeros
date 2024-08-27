@@ -20,7 +20,7 @@ export default function Home() {
           <NewGroupPage />
         </div>
       </div>
-      <div className='w-full'>
+      <div className='text-center w-full object-top lg:text-2xl md:text-1xl items-center py-6 px-4'>
         <PreviousGroupsPage/>
       </div>
     </main>
