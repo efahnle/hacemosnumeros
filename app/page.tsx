@@ -14,13 +14,14 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center py-20 px-4 min-w-32">
 
-      <div className='w-full'>
-        <PreviousGroupsPage/>
-      </div>
+
       <div className='w-full '>
         <div className='text-center w-full object-top lg:text-2xl md:text-1xl items-center py-6 px-4'>
           <NewGroupPage />
         </div>
+      </div>
+      <div className='w-full'>
+        <PreviousGroupsPage/>
       </div>
     </main>
   );
