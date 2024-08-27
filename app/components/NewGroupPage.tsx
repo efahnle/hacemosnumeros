@@ -7,7 +7,7 @@ import { TagField } from "@/app/ui/TagField";
 import { initializeDataForNewGroup } from "@/app/lib/LocalStorageWrapper"
 
 
-export const NewGroupPage = () => {
+const NewGroupPage = () => {
   const MAX_TAGS = 50;
   const MIN_TAGS = 2;
   const router = useRouter();
@@ -47,6 +47,7 @@ export const NewGroupPage = () => {
         <div className="flex flex-col w-full text-sm md:text-base lg:text-lg py-2 md:py-4">
           <div className="flex flex-row items-center gap-2">
             <input
+              id="input_name_group"
               name="keyword_group"
               type="text"
               placeholder={
@@ -76,6 +77,7 @@ export const NewGroupPage = () => {
             />
 
             <button
+              id="add"
               type="submit"
               className={`pd-4 h-10 mt-4 items-center justify-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 ${tags.length < MIN_TAGS ? "opacity-50 cursor-not-allowed" : ""}`}
 
@@ -93,3 +95,6 @@ export const NewGroupPage = () => {
     </div>
   );
 };
+
+
+export default NewGroupPage;

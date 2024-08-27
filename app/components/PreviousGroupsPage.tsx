@@ -7,14 +7,14 @@ import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { deleteGroup } from '@/app/lib/LocalStorageWrapper';
 
 
-export const PreviousGroupsPage = () => {
+const PreviousGroupsPage = () => {
   const { groups } = usePreviousGroups();
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [groupToDelete, setGroupToDelete] = useState<number | null>(null);
 
   const handleRowClick = (index: number) => {
-    console.log("rowclick " + index)
+    //console.log("rowclick " + index)
     router.push(`/expenses/${index}`);
   };
 
@@ -29,7 +29,7 @@ export const PreviousGroupsPage = () => {
 
   const confirmDelete = () => {
     if (groupToDelete !== null) {
-      console.log(`Confirmed delete of group at index ${groupToDelete}`);
+      //console.log(`Confirmed delete of group at index ${groupToDelete}`);
       deleteGroup(groupToDelete);
       setIsModalOpen(false);
       setGroupToDelete(null);
@@ -124,3 +124,6 @@ export const PreviousGroupsPage = () => {
     </>
   );
 };
+
+
+export default PreviousGroupsPage;

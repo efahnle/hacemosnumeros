@@ -1,6 +1,5 @@
-import { archivo } from '@/app/ui/fonts';
-import { NewGroupPage } from '@/app/components/NewGroupPage';
-import { PreviousGroupsPage } from '@/app/components/PreviousGroupsPage';
+import NewGroupPage from '@/app/components/NewGroupPage';
+import PreviousGroupsPage from '@/app/components/PreviousGroupsPage';
 
 export default function Home() {
 

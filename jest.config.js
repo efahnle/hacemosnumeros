@@ -5,14 +5,15 @@ const createJestConfig = nextJest({
 })
 
 const customJestConfig = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], // Correct the extension to .ts
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], 
   moduleNameMapper: {
     '^@/components/(.*)$': '<rootDir>/components/$1',
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
+    '^@/app/lib/(.*)$': '<rootDir>/app/lib/$1',
   },
-  testEnvironment: 'jest-environment-jsdom', // Ensure this is set to jsdom
+  testEnvironment: 'jest-environment-jsdom', 
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest', // Use ts-jest for TypeScript files
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
 }
 
