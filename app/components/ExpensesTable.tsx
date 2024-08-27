@@ -75,15 +75,15 @@ const ExpensesTable: React.FC<ExpensesTableProps> = ({ data, onDelete, onModify 
               <td className="px-1 py-0.5 border-b items-center ">
                 <button
                   onClick={() => onModify(index)}
-                  className="text-blue-500 hover:text-blue-700 px-3"
+                  className="text-blue-500 hover:text-blue-700 px-1"
                 >
-                  <AiOutlineEdit />
+                  <AiOutlineEdit size='19'/>
                 </button>
                 <button
                   onClick={() => onDelete(index)}
-                  className="text-red-500 hover:text-red-700 px-"
+                  className="text-red-500 hover:text-red-700 px-1"
                 >
-                  <AiOutlineDelete />
+                  <AiOutlineDelete size='19'/>
                 </button>
               </td>
             </tr>

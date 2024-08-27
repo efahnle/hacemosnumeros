@@ -48,8 +48,8 @@ const ResultsDashboardPage = () => {
   const result = calculateResults(expenses);
 
   return (
-    <main className="flex flex-col items-center p-12 min-w-32">
-      <h1 className={`${archivo.className} flex text-center break-normal pt-20 items-center text-3xl md:text-3xl lg:text-5xl`}>
+    <main className="flex flex-col items-center px-8 py-20 min-w-32">
+      <h1 className={`${archivo.className} flex text-center break-normal mt-8 items-center text-3xl md:text-3xl lg:text-5xl`}>
         ¡Hicimos números!
       </h1>
       <ResultsTable debtMap={result} />

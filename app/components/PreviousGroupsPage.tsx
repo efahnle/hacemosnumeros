@@ -77,7 +77,7 @@ export const PreviousGroupsPage = () => {
                           handleEditClick(index);
                         }}
                       >
-                        <AiOutlineEdit />
+                        <AiOutlineEdit size={24} />
                       </button>
                       <button
                         className="text-red-500 hover:underline"
@@ -86,7 +86,7 @@ export const PreviousGroupsPage = () => {
                           handleDeleteClick(index);
                         }}
                       >
-                        <AiOutlineDelete />
+                        <AiOutlineDelete size={24}/>
                       </button>
                     </td>
                   </tr>

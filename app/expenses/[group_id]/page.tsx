@@ -47,12 +47,12 @@ const ExpensesDashboardPage = () => {
   };
 
   return (
-    <main className="flex flex-col items-center p-20 min-w-32">
+    <main className="flex flex-col items-center px-8 py-20 min-w-32">
       {loading ? (
         <LoadingSpinner />
       ) : (
         <>
-          <h1 className={`${archivo.className} flex text-center break-normal text-nowrap items-center text-3xl md:text-3xl lg:text-5xl `}>
+          <h1 className={`${archivo.className} flex text-center break-normal text-nowrap mt-8 items-center text-3xl md:text-3xl lg:text-5xl `}>
             Gastos
           </h1>
 

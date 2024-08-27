@@ -65,9 +65,9 @@ export default function EditExpense() {
 
 
   return (
-    <main className="flex flex-col items-center p-20 min-w-32">
+    <main className="flex flex-col items-center py-20 px-8 min-w-32">
       <div>
-        <h1 className={`${archivo.className} flex text-center break-normal items-center lg:text-5xl text-2xl md:text-3xl mb-8`}>
+        <h1 className={`${archivo.className} flex text-center break-normal items-center mt-8 lg:text-5xl text-2xl md:text-3xl mb-8`}>
           Editar gasto
         </h1>
       </div>
