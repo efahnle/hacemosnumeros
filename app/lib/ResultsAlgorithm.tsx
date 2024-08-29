@@ -14,7 +14,9 @@ export default function calculateResults(expenses: Expense[]) {
   
   expenses.forEach(expense => {
     const { payer, amount, participants } = expense;
-    const share = amount / participants.length;
+
+    // Weird typescript rounding bug
+    const share = Math.round( amount / participants.length);
 
     participants.forEach(participant => {
       if (participant !== payer) {
@@ -36,21 +38,24 @@ export default function calculateResults(expenses: Expense[]) {
 
 function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
   const balances: Balance[] = [];
+  
   for (const person_a in debtMap) {
 
     let person_a_balance = 0;
 
     for (const person_b in debtMap[person_a]) {
+      
       /*
       if (debtMap[person_a][person_b] > 0) {
         // person_a OWES person_b $N 
-        //console.log("a " + person_a + " owes " + person_b + " $" + debtMap[person_a][person_b])
+        console.log("a " + person_a + " owes " + person_b + " $" + debtMap[person_a][person_b])
       } else {
         // person_b OWES person_a $n
-        //console.log("b " + person_b + " owes " + person_a + " $" + Math.abs(debtMap[person_a][person_b]))
+        console.log("b " + person_b + " owes " + person_a + " $" + Math.abs(debtMap[person_a][person_b]))
       }
       */
       person_a_balance += debtMap[person_a][person_b];
+
     }
 
     const balance: Balance = {
@@ -61,11 +66,10 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
     balances.push(balance)
   }
 
-
+  
   const creditors = balances.filter((creditor) => creditor.amount < 0);
-
+  
   const debtors = balances.filter((debtor) => debtor.amount > 0);
-
   let max_escape = 0;
 
   const all_participants = balances.map(balance => balance.person);
@@ -76,8 +80,10 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
 
     const j = 0
     while (creditors[i].amount != 0) {
+      // console.log("person: " + creditors[i].person + ", amount: " + creditors[i].amount)
 
       if (Math.abs(creditors[i].amount) >= Math.abs(debtors[j].amount)) {
+        // console.log("case a: " + debtors[j].person + ", amount: " + debtors[j].amount)
         // Send entire amount from debtor to creditor
         // All the debt is assigned to the same creditor and we remove the debtor from the list
 
@@ -92,6 +98,7 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
         debtors.splice(j, 1);
 
       } else {
+        // console.log("case b: " + debtors[j].person + ", amount: " + debtors[j].amount)
         // The entire debt is more than what the creditor must receive. the debt must be splitted
         // Here this debtor pays 100% of what the creditor had to receive, and sets the difference to find another creditor the next loop
         const difference = Math.abs(debtors[j].amount) - Math.abs(creditors[i].amount);
