@@ -3,7 +3,7 @@
 
 `¿Hacemos números?` es una aplicación totalmente **gratuita** para dividir fácilmente los gastos de grupos y compartirlos por WhatsApp en un click. 
 
-Esta aplicación busca resolver los gastos de una cena, un viaje o un regalo en el momento sin necesidad de tener una cuenta, bajar una aplicación o tener que pagar para hacerlo de manera cómoda.
+Esta aplicación busca resolver los gastos de una cena, un viaje o un regalo en el momento, sin necesidad de descargar una aplicación, registrarse, o pagar una suscripción.
 
 ## Funcionalidades
 - Carga de gastos agrupados por juntadas
