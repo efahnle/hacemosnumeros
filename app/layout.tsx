@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { inter,archivo } from "@/app/ui/fonts";
 import Link from 'next/link';
-import logo from "@/app/ui/images/logo3.png";
+import logo from "@/app/ui/images/logo.png";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa6";
 
