@@ -52,7 +52,7 @@ const ExpensesDashboardPage = () => {
         <LoadingSpinner />
       ) : (
         <>
-          <h1 className={`${archivo.className} flex text-center break-normal text-nowrap mt-8 items-center text-3xl md:text-3xl lg:text-5xl `}>
+          <h1 className={`${archivo.className} flex text-center break-normal text-nowrap mt-8 items-center text-2xl md:text-2xl lg:text-3xl `}>
             Gastos
           </h1>
 

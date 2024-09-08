@@ -49,7 +49,7 @@ const ResultsDashboardPage = () => {
 
   return (
     <main className="flex flex-col items-center px-8 py-20 min-w-32">
-      <h1 className={`${archivo.className} flex text-center break-normal mt-8 items-center text-3xl md:text-3xl lg:text-5xl`}>
+      <h1 className={`${archivo.className} flex text-center break-normal mt-8 items-center text-2xl lg:text-3xl`}>
         ¡Hicimos números!
       </h1>
       <ResultsTable debtMap={result} />

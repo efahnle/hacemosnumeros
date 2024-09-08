@@ -46,9 +46,9 @@ const PreviousGroupsPage = () => {
     <>
       {groups && groups.length > 0 && (
         <div>
-          <div className="text-center font-bold pb-6 mt-8 text-2xl md:text-3xl">Juntadas anteriores</div>
+          <div className="text-center font-bold pb-6 mt-8 text-2xl md:text-2xl">Juntadas anteriores</div>
           <div className='border-2 rounded-md border-[614B47] px-2 pb-2'>
-            <div className="w-full overflow-x-auto text-center object-top text-xs sm:text-l md:text-2xl items-center p-2 mt-8">
+            <div className="w-full overflow-x-auto text-center object-top text-xs sm:text-l md:text-xl items-center p-2 mt-8">
               <table className="min-w-full bg-white border-gray-300">
                 <thead>
                   <tr>

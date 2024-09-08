@@ -15,7 +15,7 @@ const ExpensesTable: React.FC<ExpensesTableProps> = ({ data, onDelete, onModify 
   if (!data) {
 
     return (
-      <div className="overflow-x-auto text-center object-top  text-xs sm:text-l md:text-2xl  items-center p-2 mt-12">
+      <div className="overflow-x-auto text-center object-top  text-xs sm:text-l md:text-xl  items-center p-2 mt-12">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
@@ -54,7 +54,7 @@ const ExpensesTable: React.FC<ExpensesTableProps> = ({ data, onDelete, onModify 
 
   }
   return (
-    <div className="overflow-x-auto text-center object-top  text-xs sm:text-l md:text-2xl  items-center p-2 mt-12">
+    <div className="overflow-x-auto text-center object-top  text-xs sm:text-l md:text-xl  items-center p-2 mt-12">
       <table className="min-w-full bg-white border border-gray-200">
         <thead>
           <tr>

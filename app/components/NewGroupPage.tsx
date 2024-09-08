@@ -33,13 +33,13 @@ const NewGroupPage = () => {
   return (
     <div>
       
-      <div className='text-center font-bold mt-8 pb-6 text-2xl md:text-3xl lg:text-5xl'>
+      <div className='text-center font-bold mt-8 pb-6 text-2xl md:text-3xl lg:text-3xl'>
         Creá una nueva juntada  
       </div>
       
       <div className='border-2 rounded-md border-[614B47] px-2 pb-2'>
         <div>
-          <p className="text-center object-top lg:text-2xl md:text-1xl  pt-8">
+          <p className="text-center object-top lg:text-xl md:text-1xl  pt-8">
             Ponele un nombre a la juntada
           </p>
         </div>
@@ -62,7 +62,7 @@ const NewGroupPage = () => {
         </div>
 
         <div>
-          <p className="text-center object-top lg:text-2xl md:text-1xl  pt-8">
+          <p className="text-center object-top lg:text-xl md:text-1xl  pt-8">
             Ingresá los participantes
           </p>
         </div>
