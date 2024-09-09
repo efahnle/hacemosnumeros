@@ -11,7 +11,7 @@ export default function Home() {
       </div>*/
 
   return (
-    <main className="flex flex-col items-center py-20 px-4 min-w-32">
+    <main className="flex flex-col items-center py-20 px-4 min-w-32 max-w-5xl mx-auto">
 
 
       <div className='w-full '>

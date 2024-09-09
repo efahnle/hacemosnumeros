@@ -73,7 +73,7 @@ const EditGroupPage = () => {
         }
     };
     return (
-        <div className='text-center w-full object-top lg:text-2xl md:text-1xl items-center py-20 px-8'>
+        <div className='text-center w-full max-w-5xl mx-auto object-top lg:text-2xl md:text-1xl items-center py-20 px-8'>
             <div>
                 <div className={`${archivo.className}flex text-center break-normal text-nowrap mt-8 items-center text-2xl md:text-2xl lg:text-2xl`}>
                     Editá la juntada

@@ -72,7 +72,7 @@ export default function EditExpense() {
         </h1>
       </div>
       <div>
-        <div className='text-center object-top w-screen lg:text-2xl md:text-1xl items-center p-12'>
+        <div className='text-center max-w-5xl mx-auto  object-top w-screen lg:text-2xl md:text-1xl items-center p-12'>
           <ExpenseCrud onInputChange={handleInputChange} 
             prePayer={expenseObject['payer']} 
             preAmount={expenseObject['amount']} 

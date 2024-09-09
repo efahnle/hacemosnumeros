@@ -72,7 +72,7 @@ export default function AddExpense() {
         </h1>
       </div>
       <div>
-        <div className='text-center object-top w-screen lg:text-2xl md:text-1xl items-center p-12'>
+        <div className='text-center object-top max-w-5xl mx-auto w-screen lg:text-2xl md:text-1xl items-center p-12'>
           <ExpenseCrud onInputChange={handleInputChange} />
           <ConfirmCancelBar onButtonClick={handleButtonClick} />
         </div>
