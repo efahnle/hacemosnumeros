@@ -9,12 +9,15 @@ import AddExpenseButton from '@/app/components/AddExpenseButton';
 import LoadingSpinner from '@/app/components/LoadingSpinner';
 import { getDataInIndex, deleteExpenseInGroup } from '@/app/lib/LocalStorageWrapper';
 import { Group } from '@/app/interfaces/Interfaces';
+import EmptyStateComponent from '@/app/components/EmptyStateComponent';
+
 
 const ExpensesDashboardPage = () => {
   const [loading, setLoading] = useState(false);
   const [groupData, setGroupData] = useState<Group | null>(null); 
   const router = useRouter();
   const params = useParams<{ group_id: string }>();
+  console.log(groupData);
 
   // Fetch group data after component mounts (client-side only)
   useEffect(() => {
@@ -57,13 +60,13 @@ const ExpensesDashboardPage = () => {
           </h1>
 
           <div>
-            {groupData ? (
+          {(groupData?.expenses?.length ?? 0) > 0 ? (
               <>
                 <ExpensesTable data={groupData} onDelete={handleDelete} onModify={handleModify} />
                 <AddExpenseButton onButtonClick={handleButtonClick} />
               </>
             ) : (
-              <LoadingSpinner />
+              <EmptyStateComponent onCreateNew={() => router.push('/expenses/' + params['group_id'] + '/add-expense')} />
             )}
           </div>
           <ButtonBar onButtonClick={handleButtonClick} loading={loading} />

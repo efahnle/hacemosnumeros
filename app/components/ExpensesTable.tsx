@@ -6,7 +6,7 @@ import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { Group } from '@/app/interfaces/Interfaces';
 
 interface ExpensesTableProps {
-  data: Group;
+  data: Group | null;
   onDelete: (id: number) => void;
   onModify: (id: number) => void;
 }

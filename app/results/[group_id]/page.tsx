@@ -8,6 +8,9 @@ import { archivo } from '@/app/ui/fonts';
 import calculateResults from '@/app/lib/ResultsAlgorithm';
 import { getExpensesFromGroup, getGroupNameInGroup } from '@/app/lib/LocalStorageWrapper';
 import { ExpenseItem } from '@/app/interfaces/Interfaces';
+import EmptyStateComponent from '@/app/components/EmptyStateComponent';
+
+
 
 const ResultsDashboardPage = () => {
   const router = useRouter();
@@ -31,7 +34,7 @@ const ResultsDashboardPage = () => {
 
       for (const personA in debtMap) {
         for (const personB in debtMap[personA]) {
-          const record = debtMap[personA][personB] > 0 
+          const record = debtMap[personA][personB] > 0
             ? ` - ${personA} le debe $${Math.abs(debtMap[personA][personB]).toFixed(2)} a ${personB}\n`
             : ` - ${personA} recibe $${Math.abs(debtMap[personA][personB]).toFixed(2)} de ${personB}\n`;
 
@@ -49,11 +52,19 @@ const ResultsDashboardPage = () => {
 
   return (
     <main className="flex flex-col items-center px-8 py-20 min-w-32">
-      <h1 className={`${archivo.className} flex text-center break-normal mt-8 items-center text-2xl lg:text-3xl`}>
-        ¡Hicimos números!
-      </h1>
-      <ResultsTable debtMap={result} />
-      <ResultsBar onButtonClick={handleButtonClick} debtMap={result} groupName={groupName} />
+
+      {expenses.length > 0 ? (
+        <>
+          <h1 className={`${archivo.className} flex text-center break-normal mt-8 items-center text-2xl lg:text-3xl`}>
+            ¡Hicimos números!
+          </h1>
+          <ResultsTable debtMap={result} />
+          <ResultsBar onButtonClick={handleButtonClick} debtMap={result} groupName={groupName} />
+        </>
+      ) : (
+        <EmptyStateComponent onCreateNew={() => router.push('/expenses/' + params['group_id'] + '/add-expense')} />
+      )}
+
     </main>
   );
 };
