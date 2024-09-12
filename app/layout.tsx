@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { inter,archivo } from "@/app/ui/fonts";
+import { inter, archivo } from "@/app/ui/fonts";
 import Link from 'next/link';
 import logo from "@/app/ui/images/logo.png";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa6";
+import { Analytics } from '@vercel/analytics/react';
+
 
 
 export const metadata: Metadata = {
@@ -19,6 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Analytics />
       <body>
         <header className="fixed top-0 left-0 right-0 bg-[#39a399] shadow-md z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,12 +34,12 @@ export default function RootLayout({
                     width={50}
                     height={50}
                   />
-                  
+
                 </Link>
                 <span className={`${archivo.className}ml-4 text-center break-normal text-nowrap items-center text-2xl md:text-3xl lg:text-3xl`}>¿Hacemos números?</span>
                 <a href="https://github.com/efahnle/hacemosnumeros" className="flex fixed right-0 items-center lg:mr-8 mr-2" target="_blank">
-                  <FaGithub size={45}/>
-                  
+                  <FaGithub size={45} />
+
                 </a>
               </div>
               {/* Add additional elements like navigation links, user profile, etc., here */}
