@@ -10,7 +10,7 @@ import { ExpenseItem } from '@/app/interfaces/Interfaces';
 
 export default function AddExpense() {
   const router = useRouter();
-  const params = useParams<{group_id: string}>();
+  const params = useParams<{ group_id: string }>();
 
   const [expenseData, setExpenseData] = useState({
     payer: '',
@@ -65,18 +65,19 @@ export default function AddExpense() {
 
 
   return (
-    <main className="flex flex-col items-center py-20 px-8 min-w-32">
+    <main className="flex flex-col  h-max  items-center py-20 px-8 min-w-32">
       <div>
         <h1 className={`${archivo.className} flex text-center break-normal items-center mt-8 lg:text-3-xl text-2xl  mb-8`}>
           Agregar gasto
         </h1>
       </div>
       <div>
-        <div className='text-center object-top max-w-5xl mx-auto w-screen lg:text-2xl md:text-1xl items-center p-12'>
+        <div className='text-center object-top max-w-5xl mx-auto w-screen  lg:text-2xl md:text-1xl items-center p-12'>
           <ExpenseCrud onInputChange={handleInputChange} />
           <ConfirmCancelBar onButtonClick={handleButtonClick} />
         </div>
       </div>
     </main>
+
   );
 }

@@ -38,7 +38,7 @@ export const ExpenseCrud: React.FC<ExpenseCrudProps> = ({ onInputChange, prePaye
   };
 
   return (
-    <div className="grid grid-cols-2 gap-x-6 gap-y-16 align-middle h-16">
+    <div className="grid grid-cols-2 gap-x-6 gap-y-16 align-middle h-max">
       <div className="text-left text-slate-500">¿Quién hizo el gasto?</div>
       <DropdownComponent onSelect={handlePayerChange} prePayer={prePayer} />
 
