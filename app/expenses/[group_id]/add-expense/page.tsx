@@ -53,7 +53,6 @@ export default function AddExpense() {
   };
 
   const validateExpenseData = (data: typeof expenseData) => {
-    console.log(data)
     return (
       data.payer &&
       data.amount > 0 &&
