@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { getNamesInGroup } from '@/app/lib/LocalStorageWrapper';
+import { AiOutlineCheck } from 'react-icons/ai';
+
 
 interface DropdownComponentProps {
   multiSelect?: boolean;
@@ -135,24 +137,30 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = fal
           <div className="py-1" role="none">
             {multiSelect && (
               <button
-                className={`text-blue-700 text-center block px-4 py-2 text-sm w-full  hover:bg-gray-200 ${selectedOptions.length === options.length ? 'bg-gray-200' : ''}`}
+                className="text-blue-700 flex px-4 py-2 text-sm w-full text-left hover:bg-gray-200 justify-between"
                 role="menuitem"
                 tabIndex={-1}
                 onClick={handleSelectAll}
               >
-                Todos
+                <span>Todos</span>
+                {selectedOptions.length === options.length && (
+                  <AiOutlineCheck className="text-green-600 bold" />
+                )}
               </button>
             )}
 
             {options.map((option) => (
               <button
                 key={`${option}-${selectedOptions.includes(option)}`}
-                className={`text-gray-700 block px-4 py-2 text-sm w-full text-center  hover:bg-gray-200 ${selectedOptions.includes(option) ? 'bg-gray-200' : ''}`}
+                className="text-gray-700 flex px-4 py-2 text-sm w-full text-left hover:bg-gray-200 justify-between"
                 role="menuitem"
                 tabIndex={-1}
                 onClick={() => handleSelectOption(option)}
               >
-                {option}
+                <span>{option}</span>
+                {selectedOptions.includes(option) && (
+                  <AiOutlineCheck className="text-green-600 bold" />
+                )}
               </button>
             ))}
           </div>
