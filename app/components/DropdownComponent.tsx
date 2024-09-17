@@ -29,7 +29,17 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = fal
       setSelectedOptions([prePayer]);
     }
     if (preParticipants && preParticipants.length > 0) {
+      // coming from "edit expense"
       setSelectedOptions(preParticipants);
+    } else {
+      // coming from "add expense"
+      if (multiSelect) {
+        if (storedOptions) {
+          setSelectedOptions(storedOptions);
+          onSelect(storedOptions);
+        }
+      }
+
     }
 
   }, []);
@@ -65,6 +75,11 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ multiSelect = fal
   };
 
   const renderSelectedOptions = () => {
+
+    if (selectedOptions.length === options.length && multiSelect) {
+      return 'Todos'; // Display "Todos" when all options are selected
+    }
+
     return selectedOptions.length > 0
       ? selectedOptions.join(', ')
       : multiSelect ? 'Elegí' : 'Elegí uno';
