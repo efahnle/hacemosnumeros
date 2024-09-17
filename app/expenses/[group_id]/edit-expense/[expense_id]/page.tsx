@@ -58,8 +58,8 @@ export default function EditExpense() {
     return (
       data.payer &&
       data.amount > 0 &&
-      data.participants.length > 0 &&
-      data.description
+      data.participants.length > 0 
+      //&& data.description
     );
   };
 
