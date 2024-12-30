@@ -32,21 +32,35 @@ const ResultsDashboardPage = () => {
     if (buttonIndex === 2) {
       const header = `*¡Hicimos números!*\n\nJuntada: ${groupName}\n\n`;
       let payerDetails = "";
-
+      const processed = new Set<string>(); // Track processed relationships
+  
       for (const personA in debtMap) {
         for (const personB in debtMap[personA]) {
-          const record = debtMap[personA][personB] > 0
-            ? ` - ${personA} le debe $${Math.abs(debtMap[personA][personB]).toFixed(2)} a ${personB}\n`
-            : ` - ${personA} recibe $${Math.abs(debtMap[personA][personB]).toFixed(2)} de ${personB}\n`;
-
-          payerDetails += record;
+          // Create a unique key to track each relationship
+          const key = `${personA}-${personB}`;
+          const reverseKey = `${personB}-${personA}`;
+  
+          // Skip if the reverse relationship has already been processed
+          if (processed.has(reverseKey)) continue;
+  
+          processed.add(key);
+  
+          if (debtMap[personA][personB] > 0) {
+            payerDetails += ` - ${personA} le debe $${Math.abs(debtMap[personA][personB]).toFixed(2)} a ${personB}\n`;
+          }
         }
       }
-
+  
       const footer = "\nHecho con ❤️ en hacemosnumeros.com";
       const message = `${header}${payerDetails}${footer}`;
-      window.open(`whatsapp://send?text=${encodeURI(message)}`, '_blank');
-    }
+      const encodedMessage = encodeURIComponent(message);
+
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const whatsappURL = isMobile
+        ? `whatsapp://send?text=${encodedMessage}` // Mobile apps
+        : `https://web.whatsapp.com/send?text=${encodedMessage}`; // WhatsApp Web/Desktop
+  
+      window.open(whatsappURL, '_blank');    }
   };
 
   const result = calculateResults(expenses);
