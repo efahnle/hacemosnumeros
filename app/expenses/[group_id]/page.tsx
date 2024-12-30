@@ -17,7 +17,7 @@ const ExpensesDashboardPage = () => {
   const [groupData, setGroupData] = useState<Group | null>(null); 
   const router = useRouter();
   const params = useParams<{ group_id: string }>();
-  console.log(groupData);
+  //console.log(groupData);
 
   // Fetch group data after component mounts (client-side only)
   useEffect(() => {
