@@ -58,40 +58,48 @@ const PreviousGroupsPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {groups.map((group, index) => (
-                    <tr key={index} className="hover:bg-gray-100">
-                      <td
-                        className="px-1 py-0.5 border-y cursor-pointer"
-                        onClick={() => handleRowClick(index)}
-                      >
-                        {group.group_name}
-                      </td>
-                      <td className="px-1 py-0.5 border-y"
-                        onClick={() => handleRowClick(index)}>
-                        {group.expenses.length} gastos
-                      </td>
-                      <td className="px-1 py-0.5 border-y">
-                        <button
-                          className="text-blue-500 hover:underline mr-2"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleEditClick(index);
-                          }}
-                        >
-                          <AiOutlineEdit size={24} />
-                        </button>
-                        <button
-                          className="text-red-500 hover:underline"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteClick(index);
-                          }}
-                        >
-                          <AiOutlineDelete size={24} />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {groups // All of this is to show the groups in reverse order but not change the original order
+                    .slice() 
+                    .reverse() 
+                    .map((group, reversedIndex) => {
+                      const originalIndex = groups.length - 1 - reversedIndex; // Calculate the original index
+                      return (
+                        <tr key={originalIndex} className="hover:bg-gray-100">
+                          <td
+                            className="px-1 py-0.5 border-y cursor-pointer"
+                            onClick={() => handleRowClick(originalIndex)}
+                          >
+                            {group.group_name}
+                          </td>
+                          <td
+                            className="px-1 py-0.5 border-y cursor-pointer"
+                            onClick={() => handleRowClick(originalIndex)}
+                          >
+                            {group.expenses.length} gastos
+                          </td>
+                          <td className="px-1 py-0.5 border-y">
+                            <button
+                              className="text-blue-500 hover:underline mr-2"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleEditClick(originalIndex);
+                              }}
+                            >
+                              <AiOutlineEdit size={24} />
+                            </button>
+                            <button
+                              className="text-red-500 hover:underline"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteClick(originalIndex);
+                              }}
+                            >
+                              <AiOutlineDelete size={24} />
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>

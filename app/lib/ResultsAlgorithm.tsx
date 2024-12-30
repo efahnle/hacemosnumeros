@@ -17,7 +17,7 @@ export default function calculateResults(expenses: Expense[]) {
 
     // Weird typescript rounding bug
     const share = Math.round((((amount / participants.length) + 0) * 100) / 100);
-    console.log(share)
+    //console.log(share)
     participants.forEach(participant => {
       if (participant !== payer) {
 
@@ -80,10 +80,10 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
 
     const j = 0
     while (creditors[i].amount != 0) {
-      console.log("person: " + creditors[i].person + ", amount: " + creditors[i].amount)
+      //console.log("person: " + creditors[i].person + ", amount: " + creditors[i].amount)
 
       if (Math.abs(creditors[i].amount) >= Math.abs(debtors[j].amount)) {
-        console.log("case a: " + debtors[j].person + ", amount: " + debtors[j].amount)
+        //console.log("case a: " + debtors[j].person + ", amount: " + debtors[j].amount)
         // Send entire amount from debtor to creditor
         // All the debt is assigned to the same creditor and we remove the debtor from the list
 
@@ -129,7 +129,6 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
 
 
 export function sortDebts(debtMap: DebtMap) {
-  //return debtMap
 
   const sortedDebts: DebtMap = Object.entries(debtMap)
     .map(([name, balances]) => {
@@ -142,6 +141,6 @@ export function sortDebts(debtMap: DebtMap) {
       return result;
     }, {} as DebtMap);
 
-  console.log(sortedDebts);
+  //console.log(sortedDebts);
   return sortedDebts
 }
