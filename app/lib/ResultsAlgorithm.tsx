@@ -8,19 +8,19 @@ type DebtMap = Record<string, Record<string, number>>;
 export default function calculateResults(expenses: Expense[]) {
   const all_participants = expenses.flatMap(expense => expense.participants);
   const all_payers = expenses.flatMap(expense => expense.payer);
-  const all_possible_people = [ ...all_participants, ...all_payers];
+  const all_possible_people = [...all_participants, ...all_payers];
   const unique_participants = Array.from(new Set(all_possible_people));
   const debtMap: DebtMap = initialize_debtmap(unique_participants);
-  
+
   expenses.forEach(expense => {
     const { payer, amount, participants } = expense;
 
     // Weird typescript rounding bug
-    const share = Math.round( amount / participants.length);
-
+    const share = Math.round((((amount / participants.length) + 0) * 100) / 100);
+    console.log(share)
     participants.forEach(participant => {
       if (participant !== payer) {
-        
+
         if (!debtMap[participant][payer]) debtMap[participant][payer] = 0;
         if (!debtMap[payer][participant]) debtMap[payer][participant] = 0;
 
@@ -38,13 +38,13 @@ export default function calculateResults(expenses: Expense[]) {
 
 function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
   const balances: Balance[] = [];
-  
+
   for (const person_a in debtMap) {
 
     let person_a_balance = 0;
 
     for (const person_b in debtMap[person_a]) {
-      
+
       /*
       if (debtMap[person_a][person_b] > 0) {
         // person_a OWES person_b $N 
@@ -66,9 +66,9 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
     balances.push(balance)
   }
 
-  
+
   const creditors = balances.filter((creditor) => creditor.amount < 0);
-  
+
   const debtors = balances.filter((debtor) => debtor.amount > 0);
   let max_escape = 0;
 
@@ -80,10 +80,10 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
 
     const j = 0
     while (creditors[i].amount != 0) {
-      // console.log("person: " + creditors[i].person + ", amount: " + creditors[i].amount)
+      console.log("person: " + creditors[i].person + ", amount: " + creditors[i].amount)
 
       if (Math.abs(creditors[i].amount) >= Math.abs(debtors[j].amount)) {
-        // console.log("case a: " + debtors[j].person + ", amount: " + debtors[j].amount)
+        console.log("case a: " + debtors[j].person + ", amount: " + debtors[j].amount)
         // Send entire amount from debtor to creditor
         // All the debt is assigned to the same creditor and we remove the debtor from the list
 
@@ -125,5 +125,23 @@ function simplifyDebts(debtMap: Record<string, Record<string, number>>) {
 
   return simplifiedDebtMap;
 
-
 };
+
+
+export function sortDebts(debtMap: DebtMap) {
+  //return debtMap
+
+  const sortedDebts: DebtMap = Object.entries(debtMap)
+    .map(([name, balances]) => {
+      const totalBalance = Object.values(balances).reduce((sum, value) => sum + value, 0);
+      return { name, balances, totalBalance };
+    })
+    .sort((a, b) => b.totalBalance - a.totalBalance)
+    .reduce((result, { name, balances }) => {
+      result[name] = balances;
+      return result;
+    }, {} as DebtMap);
+
+  console.log(sortedDebts);
+  return sortedDebts
+}

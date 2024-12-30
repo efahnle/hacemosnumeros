@@ -9,6 +9,7 @@ import calculateResults from '@/app/lib/ResultsAlgorithm';
 import { getExpensesFromGroup, getGroupNameInGroup } from '@/app/lib/LocalStorageWrapper';
 import { ExpenseItem } from '@/app/interfaces/Interfaces';
 import EmptyStateComponent from '@/app/components/EmptyStateComponent';
+import { sortDebts } from '@/app/lib/ResultsAlgorithm';
 
 
 
@@ -58,8 +59,8 @@ const ResultsDashboardPage = () => {
           <h1 className={`${archivo.className} flex text-center break-normal mt-8 items-center text-2xl lg:text-3xl`}>
             ¡Hicimos números!
           </h1>
-          <ResultsTable debtMap={result} />
-          <ResultsBar onButtonClick={handleButtonClick} debtMap={result} groupName={groupName} />
+          <ResultsTable debtMap={sortDebts(result)} />
+          <ResultsBar onButtonClick={handleButtonClick} debtMap={sortDebts(result)} groupName={groupName} />
         </>
       ) : (
         <EmptyStateComponent onCreateNew={() => router.push('/expenses/' + params['group_id'] + '/add-expense')} />
